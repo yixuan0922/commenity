@@ -26,7 +26,7 @@ function CustomDrawerContent({
   const screens = [
     { title: "Home", navigateTo: "HomeDrawer" },
     { title: "Profile", navigateTo: "ProfileDrawer" },
-    { title: "LeaderBoard", navigateTo: "AccountDrawer" },
+    { title: "LeaderBoard", navigateTo: "LeaderBoard" },
     // { title: "Elements", navigateTo: "ElementsDrawer" },
     // { title: "Articles", navigateTo: "ArticlesDrawer" },
     { title: "Settings", navigateTo: "SettingsDrawer" },

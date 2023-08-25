@@ -34,6 +34,7 @@ import SystemNotifications from "../screens/SystemNotifications";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
+import Leaderboard from "../screens/LeaderBoard";
 
 const { width } = Dimensions.get("screen");
 
@@ -526,6 +527,13 @@ function AppStack(props) {
       <Drawer.Screen
         name="SettingsDrawer"
         component={SettingsStack}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="LeaderBoard"
+        component={Leaderboard}
         options={{
           headerShown: false,
         }}
