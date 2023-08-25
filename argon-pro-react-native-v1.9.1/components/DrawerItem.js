@@ -40,8 +40,8 @@ class DrawerItem extends React.Component {
       case "Profile":
         return (
           <Icon
-            name="chart-pie-35"
-            family="ArgonExtra"
+            name="person"
+            family="Ionicons"
             size={14}
             color={focused ? "white" : argonTheme.COLORS.WARNING}
           />
@@ -58,8 +58,8 @@ class DrawerItem extends React.Component {
       case "Settings":
         return (
           <Icon
-            name="calendar-date"
-            family="ArgonExtra"
+            name="settings"
+            family="Ionicons"
             size={14}
             color={focused ? "white" : argonTheme.COLORS.DEFAULT}
           />
@@ -69,6 +69,15 @@ class DrawerItem extends React.Component {
           <Icon
             name="spaceship"
             family="ArgonExtra"
+            size={14}
+            color={focused ? "white" : "rgba(0,0,0,0.5)"}
+          />
+        );
+        case "LeaderBoard":
+        return (
+          <Icon
+            name="leaderboard"
+            family="MaterialIcons"
             size={14}
             color={focused ? "white" : "rgba(0,0,0,0.5)"}
           />

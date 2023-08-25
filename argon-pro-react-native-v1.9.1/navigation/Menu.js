@@ -26,9 +26,9 @@ function CustomDrawerContent({
   const screens = [
     { title: "Home", navigateTo: "HomeDrawer" },
     { title: "Profile", navigateTo: "ProfileDrawer" },
-    { title: "Account", navigateTo: "AccountDrawer" },
-    { title: "Elements", navigateTo: "ElementsDrawer" },
-    { title: "Articles", navigateTo: "ArticlesDrawer" },
+    { title: "LeaderBoard", navigateTo: "AccountDrawer" },
+    // { title: "Elements", navigateTo: "ElementsDrawer" },
+    // { title: "Articles", navigateTo: "ArticlesDrawer" },
     { title: "Settings", navigateTo: "SettingsDrawer" },
   ];
   return (
@@ -52,7 +52,7 @@ function CustomDrawerContent({
               />
             );
           })}
-          <Block
+          {/* <Block
             flex
             style={{ marginTop: 24, marginVertical: 8, paddingHorizontal: 8 }}
           >
@@ -74,7 +74,7 @@ function CustomDrawerContent({
               DOCUMENTATION
             </Text>
           </Block>
-          <DrawerCustomItem title="Getting Started" navigation={navigation} />
+          <DrawerCustomItem title="Getting Started" navigation={navigation} /> */}
         </ScrollView>
       </Block>
     </Block>
