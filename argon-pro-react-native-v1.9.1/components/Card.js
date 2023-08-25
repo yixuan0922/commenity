@@ -49,9 +49,9 @@ class Card extends React.Component {
           <Block flex space="between" style={styles.cardDescription}>
             <Block flex>
               <Text
-                style={{ fontFamily: 'open-sans-regular' }}
+                style={[styles.cardTitle,{ fontFamily: 'open-sans-regular' }]}
                 size={14}
-                style={styles.cardTitle}
+                // style={styles.cardTitle}
                 color={argonTheme.COLORS.TEXT}
               >
                 {item.title}

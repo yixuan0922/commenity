@@ -1,8 +1,9 @@
 import React from 'react';
 import { withNavigation } from '@react-navigation/compat';
-import { TouchableOpacity, StyleSheet, Platform, Dimensions, Keyboard } from 'react-native';
+import { TouchableOpacity, StyleSheet, Platform, Dimensions, Keyboard, View } from 'react-native';
 import { Button, Block, NavBar, Text, theme } from 'galio-framework';
 import { CommonActions } from '@react-navigation/native';
+
 
 import Icon from './Icon';
 import Input from './Input';
@@ -12,18 +13,21 @@ import argonTheme from '../constants/Theme';
 const { height, width } = Dimensions.get('window');
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);
 
+
+// route to create new post
 const BellButton = ({isWhite, style, navigation}) => (
-  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('Notifications')}>
+  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('Notifications')}> 
     <Icon
-      family="ArgonExtra"
+      family="Ionicons"
       size={16}
-      name="bell"
+      name="add-circle"
       color={argonTheme.COLORS[isWhite ? 'WHITE' : 'ICON']}
     />
-    <Block middle style={styles.notify} />
+    {/* <Block middle style={styles.notify} /> */}
   </TouchableOpacity>
 );
 
+// route to create new post
 const BasketButton = ({isWhite, style, navigation}) => (
   <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('Cart')}>
     <Icon
@@ -58,7 +62,7 @@ class Header extends React.Component {
     if (title === 'Title') {
       return [
         <BellButton key='chat-title' navigation={navigation} isWhite={white} />,
-        <BasketButton key='basket-title' navigation={navigation} isWhite={white} />
+        // <BasketButton key='basket-title' navigation={navigation} isWhite={white} />
       ]
     }
 
@@ -73,7 +77,7 @@ class Header extends React.Component {
       case 'Settings':
         return ([
           <BellButton key='chat-categories' navigation={navigation} isWhite={white}/>,
-          <BasketButton key='basket-categories' navigation={navigation} isWhite={white}/>
+          // <BasketButton key='basket-categories' navigation={navigation} isWhite={white}/>
         ]);
       default:
         break;
@@ -97,20 +101,22 @@ class Header extends React.Component {
     const { navigation, optionLeft, optionRight } = this.props;
 
     return (
-      <Block row style={styles.options}>
-        <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('Beauty')}>
-          <Block row middle>
-            <Icon name="diamond" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON} />
-            <Text style={{ fontFamily: 'open-sans-regular' }} size={16}  style={styles.tabTitle}>{optionLeft || 'Beauty'}</Text>
-          </Block>
-        </Button>
-        <Button shadowless style={styles.tab} onPress={() => navigation.navigate('Fashion')}>
-          <Block row middle>
-            <Icon size={16} name="bag-17" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>
-            <Text style={{ fontFamily: 'open-sans-regular' }} size={16} style={styles.tabTitle}>{optionRight || 'Fashion'}</Text>
-          </Block>
-        </Button>
-      </Block>
+      // <Block row style={styles.options}>
+      //   <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('Beauty')}>
+      //     <Block row middle>
+      //       <Icon name="diamond" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON} />
+      //       <Text style={{ fontFamily: 'open-sans-regular' }} size={16}  style={styles.tabTitle}>{optionLeft || 'Beauty'}</Text>
+      //     </Block>
+      //   </Button>
+      //   <Button shadowless style={styles.tab} onPress={() => navigation.navigate('Fashion')}>
+      //     <Block row middle>
+      //       <Icon size={16} name="bag-17" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>
+      //       <Text style={{ fontFamily: 'open-sans-regular' }} size={16} style={styles.tabTitle}>{optionRight || 'Fashion'}</Text>
+      //     </Block>
+      //   </Button>
+      // </Block>
+      <>
+      </>
     );
   }
   renderTabs = () => {
@@ -220,6 +226,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: theme.COLORS.WHITE,
+    // marginBottom: 50,
   },
   divider: {
     borderRightWidth: 0.3,
@@ -231,7 +238,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     borderWidth: 1,
     borderRadius: 3,
-    borderColor: argonTheme.COLORS.BORDER
+    borderColor: argonTheme.COLORS.BORDER, 
   },
   options: {
     marginBottom: 24,
