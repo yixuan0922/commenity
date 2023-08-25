@@ -11,6 +11,14 @@ const androidLogo = require("../assets/imgs/android.png");
 const ProfilePicture = require("../assets/imgs/profile-img.jpg");
 const ProfilePicture2 = require("../assets/imgs/profile-img2.jpg");
 const ProfileGiveHand = require("../assets/imgs/profile-give-hand.png");
+
+// local district images
+const redhill = require("../assets/imgs/redhill.jpg");
+const bukitPanjang = require('../assets/imgs/bukitpanjang.jpg');
+
+
+
+
 // internet imgs
 const ProfileChat = "https://images.unsplash.com/photo-1500522144261-ea64433bbe27?fit=crop&w=1051&q=80";
 
@@ -63,4 +71,6 @@ export default {
     Beauty,
     Music,
     ProfileChat,
+    redhill,
+    bukitPanjang
 };

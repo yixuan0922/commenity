@@ -3,6 +3,7 @@ import { StyleSheet , Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { Block, Text, theme } from 'galio-framework';
 import Icon from './Icon';
+import { Images } from "../constants";
 
 import { argonTheme } from "../constants";
 
@@ -16,10 +17,10 @@ class Board extends React.Component {
     return (
         <Block key={item.rank} style={itemContainer}>
         <Text style={styles.rank}>{item.rank}</Text>
-        <Block flex style={styles.imgContainer}>
-            <Image source={{require:item.image}} style={{ width: 50, height: 50 }} />
+        <Block flex='0.4' style={styles.imgContainer}>
+            <Image source={Images.bukitPanjang} style={{ width: 50, height: 50 }} />
         </Block>
-        <Text style={styles.location}>{item.location}</Text>
+        <Text bold style={styles.location}>{item.location}</Text>
         <Text style={styles.score}>{item.score}</Text>
         {item.change === 'up' ? (
             // <Block style={styles.upArrow} />

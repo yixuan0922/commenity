@@ -35,6 +35,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import Leaderboard from "../screens/LeaderBoard";
+import LeaderBoardProfile from "../screens/LeaderBoardProfile";
 
 const { width } = Dimensions.get("screen");
 
@@ -428,13 +429,14 @@ function AppStack(props) {
                     headerShown: false,
                 }}
             />
-      <Drawer.Screen
-        name="LeaderBoard"
-        component={Leaderboard}
-        options={{
-          headerShown: false,
-        }}
-      />
+            <Drawer.Screen
+                name="LeaderBoard"
+                // component={Leaderboard}
+                component={LeaderBoardProfile}
+                options={{
+                headerShown: false,
+                }}
+            />
         </Drawer.Navigator>
     );
 }
