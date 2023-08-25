@@ -226,6 +226,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: theme.COLORS.WHITE,
+    // marginBottom: 50,
   },
   divider: {
     borderRightWidth: 0.3,
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     borderWidth: 1,
     borderRadius: 3,
-    borderColor: argonTheme.COLORS.BORDER
+    borderColor: argonTheme.COLORS.BORDER, 
   },
   options: {
     marginBottom: 24,
