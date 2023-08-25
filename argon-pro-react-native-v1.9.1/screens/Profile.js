@@ -4,19 +4,10 @@ import { Block, Text, theme } from "galio-framework";
 
 import { Button } from "../components";
 import { Images, argonTheme } from "../constants";
+import articles from "../constants/articles";
 import { HeaderHeight } from "../constants/utils";
-import { Icon } from "../components";
+import { Icon, Card } from "../components";
 
-const fakeData = [
-    {
-        title: "Door ot Door",
-        content: "We wil lbe ",
-    },
-    {
-        title: "Door ot Door",
-        content: "We wil lbe ",
-    },
-];
 class CommunityPost extends React.Component {
     render() {
         const { title, content } = this.props;
@@ -204,14 +195,15 @@ class Profile extends React.Component {
                                             ))}
                                         </Block> */}
                                         <Block>
-                                            {fakeData.map((elem, index) => (
-                                                <CommunityPost title={elem.title} content={elem.content} key={index} />
+                                            {articles.map((elem, index) => (
+                                                // <CommunityPost title={elem.title} content={elem.content} key={index} />
+                                                <Card item={elem} key={index} horizontal />
                                             ))}
                                         </Block>
                                     </Block>
                                 </Block>
                             </Block>
-                            <Block style={{ marginBottom: 25 }} />
+                            <Block style={{ marginBottom: 80 }} />
                         </ScrollView>
                     </ImageBackground>
                 </Block>
@@ -222,9 +214,10 @@ class Profile extends React.Component {
 
 const styles = StyleSheet.create({
     profile: {
-        marginTop: Platform.OS === "android" ? -HeaderHeight : 0,
+        marginTop: Platform.OS === "android" ? -HeaderHeight + 70 : 0,
         // marginBottom: -HeaderHeight * 2,
         flex: 1,
+        paddingBottomBottom: 50,
     },
     profileContainer: {
         width: width,
