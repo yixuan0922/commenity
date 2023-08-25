@@ -35,7 +35,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import Leaderboard from "../screens/LeaderBoard";
-import LeaderBoardProfile from "../screens/LeaderBoardProfile";
+import LeaderBoardProfile from "../screens/LeaderBoard";
 
 const { width } = Dimensions.get("screen");
 
