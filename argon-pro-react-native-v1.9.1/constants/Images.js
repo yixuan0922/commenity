@@ -1,6 +1,6 @@
 // local imgs
 const Onboarding = require("../assets/imgs/bg.png");
-const Logo = require("../assets/imgs/argon-logo.png");
+const Logo = require("../assets/imgs/argon-logo2.png");
 const LogoOnboarding = require("../assets/imgs/argon-logo-onboarding.png");
 const ProfileBackground = require("../assets/imgs/profile-screen-bg.png");
 const RegisterBackground = require("../assets/imgs/register-bg.png");
@@ -14,10 +14,7 @@ const ProfileGiveHand = require("../assets/imgs/profile-give-hand.png");
 
 // local district images
 const redhill = require("../assets/imgs/redhill.jpg");
-const bukitPanjang = require('../assets/imgs/bukitpanjang.jpg');
-
-
-
+const bukitPanjang = require("../assets/imgs/bukitpanjang.jpg");
 
 // internet imgs
 const ProfileChat = "https://images.unsplash.com/photo-1500522144261-ea64433bbe27?fit=crop&w=1051&q=80";
@@ -72,5 +69,5 @@ export default {
     Music,
     ProfileChat,
     redhill,
-    bukitPanjang
+    bukitPanjang,
 };

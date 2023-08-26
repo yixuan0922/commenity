@@ -466,7 +466,7 @@ function AppStack(props) {
                 name="LeaderBoard"
                 component={LeaderBoardStack}
                 options={{
-                headerShown: false,
+                    headerShown: false,
                 }}
             />
         </Drawer.Navigator>
@@ -481,13 +481,13 @@ export default function OnboardingStack(props) {
                 headerShown: false,
             }}
         >
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="Onboarding"
                 component={Pro}
                 option={{
                     headerTransparent: true,
                 }}
-            />
+            /> */}
             <Stack.Screen name="App" component={AppStack} />
         </Stack.Navigator>
     );
