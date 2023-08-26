@@ -20,7 +20,7 @@ class Home extends React.Component {
                         <Card item={articles[0]} horizontal />
                         <Card item={articles[1]} horizontal />
                         <Card item={articles[2]} horizontal />
-                        <Card item={articles[3]} horizontal />
+                        {/* <Card item={articles[3]} horizontal /> */}
                         {/* <Block flex row>
             <Card
               item={articles[1]}

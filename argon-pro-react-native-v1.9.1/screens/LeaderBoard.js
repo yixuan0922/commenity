@@ -1,9 +1,10 @@
 import React from "react";
 import { StyleSheet, Dimensions, ScrollView, Image, ImageBackground, Platform, TouchableOpacity } from "react-native";
 import { Block, Text, theme } from "galio-framework";
+import Images from "../constants/Images";
 
 import { Button } from "../components";
-import { Images, argonTheme } from "../constants";
+
 import articles from "../constants/articles";
 import { HeaderHeight } from "../constants/utils";
 import { Icon, Card } from "../components";

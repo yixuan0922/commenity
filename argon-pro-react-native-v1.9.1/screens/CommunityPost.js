@@ -13,8 +13,9 @@ import {
 import { Block, Text, Button, theme } from "galio-framework";
 import { Icon } from "../components";
 import argonTheme from "../constants/Theme";
-import Images from "../constants/Images";
+import {Images} from "../constants";
 import { iPhoneX, HeaderHeight } from "../constants/utils";
+
 
 const { height, width } = Dimensions.get("window");
 
@@ -30,7 +31,9 @@ export default class CommunityPost extends React.Component {
         // const { params } = navigation && navigation.state;
         // const product = params.product;
         const product = route.params?.product;
-        const productImages = [product.image, product.image, product.image, product.image];
+        // const productName = product.image;
+        
+        const productImages = [ product.image, product.image, product.image];
 
         return (
             <ScrollView
@@ -50,7 +53,7 @@ export default class CommunityPost extends React.Component {
                     >
                         <Image
                             resizeMode="cover"
-                            source={{ uri: image }}
+                            source={Images[image] }
                             style={{ width, height: iPhoneX ? width + 32 : width }}
                         />
                     </TouchableWithoutFeedback>
