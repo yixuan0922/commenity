@@ -1,3 +1,5 @@
+//leaderboard entries
+
 export default [
   {
     rank: '1',
