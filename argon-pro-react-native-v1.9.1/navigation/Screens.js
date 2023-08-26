@@ -24,6 +24,7 @@ import PrivacyScreen from "../screens/Privacy";
 // import Onboarding from "../screens/Onboarding";
 import Pro from "../screens/Pro";
 import Product from "../screens/Product";
+import CommunityPost from "../screens/CommunityPost";
 import Profile from "../screens/Profile";
 import React from "react";
 import Register from "../screens/Register";
@@ -328,6 +329,16 @@ function HomeStack(props) {
             <Stack.Screen
                 name="Product"
                 component={Product}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header title="" back white transparent navigation={navigation} scene={scene} />
+                    ),
+                    headerTransparent: true,
+                }}
+            />
+            <Stack.Screen
+                name="CommunityPost"
+                component={CommunityPost}
                 options={{
                     header: ({ navigation, scene }) => (
                         <Header title="" back white transparent navigation={navigation} scene={scene} />
