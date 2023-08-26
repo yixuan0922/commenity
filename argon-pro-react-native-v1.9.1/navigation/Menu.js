@@ -29,7 +29,9 @@ function CustomDrawerContent({
     { title: "LeaderBoard", navigateTo: "LeaderBoard" },
     // { title: "Elements", navigateTo: "ElementsDrawer" },
     // { title: "Articles", navigateTo: "ArticlesDrawer" },
+  
     { title: "Settings", navigateTo: "SettingsDrawer" },
+    { title: "Log In", navigateTo: "Login" },
   ];
   return (
     <Block
