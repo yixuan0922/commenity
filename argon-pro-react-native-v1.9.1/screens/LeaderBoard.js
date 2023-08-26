@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Dimensions, ScrollView, Image, ImageBackground, Platform, TouchableOpacity } from "react-native";
 import { Block, Text, theme } from "galio-framework";
+import Images from "../constants/Images";
 
 import { Button } from "../components";
 
