@@ -48,6 +48,17 @@ class LeaderBoard extends React.Component {
                         style={styles.profileContainer}
                         imageStyle={styles.profileBackground}
                     >
+                    <Block
+                        flex = {0.6}
+                        row
+                        middle
+                        style={{padding: 0, marginTop: -20}}
+                    >
+                        <Text h6 bold middle style={{ color: 'white' }}>
+                            August 2023
+                        </Text>
+                    </Block>
+                        
                         {/* <ScrollView showsVerticalScrollIndicator={false} style={{ width, marginTop: "25%" }}> */}
                             <Block flex style={[styles.profileCard]}>
                                 <Block style={{ width: width * 0.85, height: 150 }} row>
@@ -173,7 +184,7 @@ const styles = StyleSheet.create({
         // position: "relative",
         padding: theme.SIZES.BASE,
         marginHorizontal: theme.SIZES.BASE,
-        marginTop: 165,
+        marginTop: -90,
         borderTopLeftRadius: 6,
         borderTopRightRadius: 6,
         backgroundColor: theme.COLORS.WHITE,
