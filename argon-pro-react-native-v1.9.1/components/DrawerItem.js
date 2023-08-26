@@ -82,6 +82,15 @@ class DrawerItem extends React.Component {
             color={focused ? "white" : "rgba(0,0,0,0.5)"}
           />
         );
+        case "Log In":
+          return (
+            <Icon
+              name="login"
+              family="Entypo"
+              size={15}
+              color={focused ? "white" : "rgba(0,0,0,0.5)"}
+            />
+          );
       case "Log out":
         return <Icon />;
       default:
