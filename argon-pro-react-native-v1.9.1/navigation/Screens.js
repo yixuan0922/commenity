@@ -25,7 +25,7 @@ import PrivacyScreen from "../screens/Privacy";
 import Pro from "../screens/Pro";
 import Product from "../screens/Product";
 import CommunityPost from "../screens/CommunityPost";
-import Profile from "../screens/Profile";
+import Profile from "../screens/MyProfile";
 import React from "react";
 import Register from "../screens/Register";
 import Search from "../screens/Search";
@@ -38,6 +38,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LeaderBoard from "../screens/LeaderBoard";
 import LeaderBoardProfile from "../screens/LeaderBoard";
 import Login from "../screens/Login";
+import Agreement from "../screens/Agreement";
 
 const { width } = Dimensions.get("screen");
 
@@ -154,12 +155,22 @@ function SettingsStack(props) {
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="Cart"
                 component={Cart}
                 options={{
                     header: ({ navigation, scene }) => (
                         <Header back title="Shopping Cart" scene={scene} navigation={navigation} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" },
+                }}
+            /> */}
+            <Stack.Screen
+                name="Cart"
+                component={Cart}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header back title="Give Hearts" scene={scene} navigation={navigation} />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
@@ -229,6 +240,16 @@ function LeaderBoardStack(props) {
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
             />
+            <Stack.Screen
+                name="Cart"
+                component={Cart}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header back title="Give Hearts" scene={scene} navigation={navigation} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" },
+                }}
+            />
         </Stack.Navigator>
     );
 }
@@ -247,7 +268,7 @@ function ProfileStack(props) {
                 component={Profile}
                 options={{
                     header: ({ navigation, scene }) => (
-                        <Header transparent white title="Profile" navigation={navigation} scene={scene} />
+                        <Header transparent white title="MyProfile" navigation={navigation} scene={scene} />
                     ),
                     cardStyle: { backgroundColor: "#FFFFFF" },
                     headerTransparent: true,
@@ -273,6 +294,16 @@ function ProfileStack(props) {
                     cardStyle: { backgroundColor: "#FFFFFF" },
                 }}
             />
+            <Stack.Screen
+                name="Cart"
+                component={Cart}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header back title="Give Hearts" scene={scene} navigation={navigation} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" },
+                }}
+            />
             
         </Stack.Navigator>
     );
@@ -296,7 +327,7 @@ function HomeStack(props) {
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="Beauty"
                 component={Beauty}
                 options={{
@@ -327,8 +358,8 @@ function HomeStack(props) {
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
-            />
-            <Stack.Screen
+            /> */}
+            {/* <Stack.Screen
                 name="Product"
                 component={Product}
                 options={{
@@ -337,8 +368,8 @@ function HomeStack(props) {
                     ),
                     headerTransparent: true,
                 }}
-            />
-            <Stack.Screen
+            /> */}
+            {/* <Stack.Screen
                 name="CommunityPost"
                 component={CommunityPost}
                 options={{
@@ -367,7 +398,7 @@ function HomeStack(props) {
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
-            />
+            /> */}
             <Stack.Screen
                 name="Search"
                 component={Search}
@@ -378,12 +409,22 @@ function HomeStack(props) {
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="Cart"
                 component={Cart}
                 options={{
                     header: ({ navigation, scene }) => (
                         <Header title="Shopping Cart" back navigation={navigation} scene={scene} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" },
+                }}
+            /> */}
+            <Stack.Screen
+                name="Cart"
+                component={Cart}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header back title="Give Hearts" scene={scene} navigation={navigation} />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
