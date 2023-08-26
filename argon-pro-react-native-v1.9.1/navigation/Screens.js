@@ -34,7 +34,7 @@ import SystemNotifications from "../screens/SystemNotifications";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
-import Leaderboard from "../screens/LeaderBoard";
+import LeaderBoard from "../screens/LeaderBoard";
 import LeaderBoardProfile from "../screens/LeaderBoard";
 
 const { width } = Dimensions.get("screen");
@@ -190,6 +190,39 @@ function ArticlesStack(props) {
                 options={{
                     header: ({ navigation, scene }) => (
                         <Header title="Articles" navigation={navigation} scene={scene} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" },
+                }}
+            />
+        </Stack.Navigator>
+    );
+}
+
+function LeaderBoardStack(props) {
+    return (
+        <Stack.Navigator
+            screenOptions={{
+                mode: "card",
+                headerShown: "screen",
+            }}
+        >
+            <Stack.Screen
+                name="LeaderBoard"
+                component={LeaderBoard}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header transparent title="LeaderBoard" white navigation={navigation} scene={scene} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" },
+                    headerTransparent: true,
+                }}
+            />
+            <Stack.Screen
+                name="Notifications"
+                component={NotificationsStack}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header back title="Notifications" scene={scene} navigation={navigation} />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
@@ -431,8 +464,7 @@ function AppStack(props) {
             />
             <Drawer.Screen
                 name="LeaderBoard"
-                // component={Leaderboard}
-                component={LeaderBoardProfile}
+                component={LeaderBoardStack}
                 options={{
                 headerShown: false,
                 }}

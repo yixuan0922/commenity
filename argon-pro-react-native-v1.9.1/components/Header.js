@@ -75,7 +75,7 @@ class Header extends React.Component {
       case 'Product':
       case 'Search':
       case 'Settings':
-      case 'LeaderBoardProfile':
+      case 'LeaderBoard':
         return ([
           <BellButton key='chat-categories' navigation={navigation} isWhite={white}/>,
           // <BasketButton key='basket-categories' navigation={navigation} isWhite={white}/>

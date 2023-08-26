@@ -33,7 +33,7 @@ const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
-class LeaderBoardProfile extends React.Component {
+class LeaderBoard extends React.Component {
 
 
     render() {
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
         // position: "relative",
         padding: theme.SIZES.BASE,
         marginHorizontal: theme.SIZES.BASE,
-        marginTop: 115,
+        marginTop: 165,
         borderTopLeftRadius: 6,
         borderTopRightRadius: 6,
         backgroundColor: theme.COLORS.WHITE,
@@ -232,4 +232,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LeaderBoardProfile;
+export default LeaderBoard;

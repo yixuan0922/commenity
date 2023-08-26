@@ -17,10 +17,10 @@ class Board extends React.Component {
     return (
         <Block key={item.rank} style={itemContainer}>
         <Text style={styles.rank}>{item.rank}</Text>
-        <Block flex='0.4' style={styles.imgContainer}>
+        <Block style={styles.imgContainer}>
             <Image source={Images.bukitPanjang} style={{ width: 50, height: 50 }} />
         </Block>
-        <Text bold style={styles.location}>{item.location}</Text>
+        <Text bold style={[styles.location, { paddingLeft: 10 }]}>{item.location}</Text>
         <Text style={styles.score}>{item.score}</Text>
         {item.change === 'up' ? (
             // <Block style={styles.upArrow} />
