@@ -1,24 +1,24 @@
 export default [
     {
-        title: "Ice cream is made with carrageenan …",
+        title: "Buy Food (Every Tuesday)",
         content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin feugiat leo et felis vestibulum ultrices. Vestibulum venenatis feugiat odio, quis feugiat ipsum pharetra non. Donec consequat sit amet tortor eget convallis. Duis in elit ut turpis tristique elementum in at nunc. Donec scelerisque ligula faucibus neque blandit pretium. Suspendisse quis sagittis nisl. Vivamus auctor diam imperdiet enim pellentesque rutrum. Aliquam purus nunc, congue ac facilisis vitae, consequat eu massa.",
-        image: "https://images.unsplash.com/photo-1516559828984-fb3b99548b21?ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80",
+            "I have an elderly aged 81 that will be home alone every Tuesday. I need help in buying food for her. Please contact me for more information @88888888.",
+        image: "chickenRice",
         cta: "View Post",
         horizontal: true,
     },
     {
-        title: "Is makeup one of your daily esse …",
+        title: "Community: Door to Door Knocking",
         content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin feugiat leo et felis vestibulum ultrices. Vestibulum venenatis feugiat odio, quis feugiat ipsum pharetra non. Donec consequat sit amet tortor eget convallis. Duis in elit ut turpis tristique elementum in at nunc. Donec scelerisque ligula faucibus neque blandit pretium. Suspendisse quis sagittis nisl. Vivamus auctor diam imperdiet enim pellentesque rutrum. Aliquam purus nunc, congue ac facilisis vitae, consequat eu massa.",
-        image: "https://images.unsplash.com/photo-1519368358672-25b03afee3bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2004&q=80",
+            "We will be going for door-to-door knocking on 26th August to find out what elderly in our neighbourhood are doing and provide them with assistance or answer their queries!",
+        image: "door_to_door",
         cta: "View Post",
     },
     {
-        title: "Coffee is more than just a drink: It’s …",
+        title: "Community: Door to Door Knocking",
         content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin feugiat leo et felis vestibulum ultrices. Vestibulum venenatis feugiat odio, quis feugiat ipsum pharetra non. Donec consequat sit amet tortor eget convallis. Duis in elit ut turpis tristique elementum in at nunc. Donec scelerisque ligula faucibus neque blandit pretium. Suspendisse quis sagittis nisl. Vivamus auctor diam imperdiet enim pellentesque rutrum. Aliquam purus nunc, congue ac facilisis vitae, consequat eu massa.",
-        image: "https://images.unsplash.com/photo-1500522144261-ea64433bbe27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80",
+            "We will be going for door-to-door knocking on 26th August to find out what elderly in our neighbourhood are doing and provide them with assistance or answer their queries!",
+        image: "door_to_door",
         cta: "View Post",
     },
     {

@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions, ScrollView, Image, ImageBackground, Platform, T
 import { Block, Text, theme } from "galio-framework";
 
 import { Button } from "../components";
-import { Images, argonTheme } from "../constants";
+
 import articles from "../constants/articles";
 import { HeaderHeight } from "../constants/utils";
 import { Icon, Card } from "../components";
