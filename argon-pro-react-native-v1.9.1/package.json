@@ -27,6 +27,7 @@
     "expo-linear-gradient": "~12.1.2",
     "expo-modules-core": "~1.2.7",
     "expo-splash-screen": "^0.18.2",
+    "firebase": "^10.3.0",
     "galio-framework": "^0.8.0",
     "prop-types": "^15.7.2",
     "react": "18.2.0",
