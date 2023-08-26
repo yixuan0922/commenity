@@ -166,7 +166,7 @@ class Header extends React.Component {
                     leftStyle={{ paddingVertical: 12, flex: 0.2 }}
                     titleStyle={[
                         styles.title,
-                        { color: argonTheme.COLORS[white ? "WHITE" : "HEADER"] },
+                        { color: argonTheme.COLORS[white ? "WHITE" : "HEADER"], marginLeft: 20 },
                         titleColor && { color: titleColor },
                     ]}
                     {...props}

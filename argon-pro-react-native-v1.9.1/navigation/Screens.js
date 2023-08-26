@@ -37,6 +37,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import LeaderBoard from "../screens/LeaderBoard";
 import LeaderBoardProfile from "../screens/LeaderBoard";
+import Login from "../screens/Login";
 
 const { width } = Dimensions.get("screen");
 
@@ -272,6 +273,7 @@ function ProfileStack(props) {
                     cardStyle: { backgroundColor: "#FFFFFF" },
                 }}
             />
+            
         </Stack.Navigator>
     );
 }
@@ -476,6 +478,20 @@ function AppStack(props) {
             <Drawer.Screen
                 name="LeaderBoard"
                 component={LeaderBoardStack}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Drawer.Screen
+                name="Login"
+                component={Login}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Drawer.Screen
+                name="Register"
+                component={Register}
                 options={{
                     headerShown: false,
                 }}

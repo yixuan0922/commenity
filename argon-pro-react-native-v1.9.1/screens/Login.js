@@ -20,9 +20,8 @@ const DismissKeyboard = ({ children }) => (
   </TouchableWithoutFeedback>
 );
 
-class Register extends React.Component {
+class Login extends React.Component {
   render() {
-
     const { navigation } = this.props;
 
     return (
@@ -38,8 +37,8 @@ class Register extends React.Component {
                 <Block flex space="between">
                   <Block flex={0.2} middle style={styles.socialConnect}>
                     <Block flex={0.6} middle>
-                      <Text color="#8898AA" size={12}>
-                        Sign up with
+                      <Text color="#8898AA" size={15}>
+                        Sign in with
                       </Text>
                     </Block>
                     <Block flex={0.4} row style={{ marginBottom: 18 }}>
@@ -48,13 +47,13 @@ class Register extends React.Component {
                       >
                         <Block row>
                           <Icon
-                            name="logo-github"
+                            name="logo-google"
                             family="Ionicon"
                             size={14}
                             color={"black"}
                             style={{ marginTop: 2, marginRight: 5 }}
                           />
-                          <Text style={styles.socialTextButtons}>GITHUB</Text>
+                          <Text style={styles.socialTextButtons}>GOOGLE</Text>
                         </Block>
                       </Button>
                       <Button style={styles.socialButtons}>
@@ -81,13 +80,13 @@ class Register extends React.Component {
                         color="#8898AA"
                         size={12}
                       >  
-                        Or sign up the classic way
+                        Or sign in the classic way
                       </Text>
                     </Block>
                     <Block center flex={0.9}>
                       <Block flex space="between">
                         <Block>
-                          <Block
+                          {/* <Block
                             width={width * 0.8}
                             style={{ marginBottom: 5 }}
                           >
@@ -104,7 +103,7 @@ class Register extends React.Component {
                                 />
                               }
                             />
-                          </Block>
+                          </Block> */}
                           <Block
                             width={width * 0.8}
                             style={{ marginBottom: 5 }}
@@ -138,7 +137,7 @@ class Register extends React.Component {
                                 />
                               }
                             />
-                            <Block row style={styles.passwordCheck}>
+                            {/* <Block row style={styles.passwordCheck}>
                               <Text
                                 style={{ fontFamily: "open-sans-regular" }}
                                 size={12}
@@ -154,12 +153,12 @@ class Register extends React.Component {
                                 {" "}
                                 strong
                               </Text>
-                            </Block>
+                            </Block> */}
                           </Block>
                           <Block row width={width * 0.75}>
-                          <Button
-                              onPress={() => navigation.navigate("Login")}
-                              style={{ width: 300 }}
+                            <Button
+                              onPress={() => navigation.navigate("Register")}
+                              style={{ width: 200 }}
                               color="transparent"
                               textStyle={{
                                 color: argonTheme.COLORS.PRIMARY,
@@ -169,18 +168,21 @@ class Register extends React.Component {
                               }}
 
                             >
-                              Already have an Account? Sign In
+                              New to Commenity? Sign Up
                             </Button>
                           </Block>
                         </Block>
                         <Block center>
-                          <Button color="primary" style={styles.createButton}>
+                          <Button 
+                          color="primary" 
+                          style={styles.createButton}
+                          onPress={() => navigation.navigate("Home")}>
                             <Text
                               style={{ fontFamily: "open-sans-bold" }}
                               size={14}
                               color={argonTheme.COLORS.WHITE}
                             >
-                              CREATE ACCOUNT
+                              Log In
                             </Text>
                           </Button>
                         </Block>
@@ -251,4 +253,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Register;
+export default Login;

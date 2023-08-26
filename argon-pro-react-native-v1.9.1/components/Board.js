@@ -20,7 +20,7 @@ class Board extends React.Component {
         <Block style={styles.imgContainer}>
             <Image source={Images.bukitPanjang} style={{ width: 50, height: 50 }} />
         </Block>
-        <Text bold style={[styles.location, { paddingLeft: 10 }]}>{item.location}</Text>
+        <Text style={[styles.location, { paddingLeft: 10 }]}>{item.location}</Text>
         <Text style={styles.score}>{item.score}</Text>
         {item.change === 'up' ? (
             // <Block style={styles.upArrow} />
