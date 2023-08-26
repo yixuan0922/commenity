@@ -29,7 +29,9 @@ export default class CommunityPost extends React.Component {
         const { navigation, route } = this.props;
         // const { params } = navigation && navigation.state;
         // const product = params.product;
+        
         const product = route.params?.product;
+        // console.log(product)
         const productImages = [product.image, product.image, product.image, product.image];
 
         return (

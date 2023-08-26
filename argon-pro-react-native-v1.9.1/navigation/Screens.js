@@ -25,7 +25,7 @@ import PrivacyScreen from "../screens/Privacy";
 import Pro from "../screens/Pro";
 import Product from "../screens/Product";
 import CommunityPost from "../screens/CommunityPost";
-import Profile from "../screens/MyProfile";
+import MyProfile from "../screens/MyProfile";
 import React from "react";
 import Register from "../screens/Register";
 import Search from "../screens/Search";
@@ -39,6 +39,8 @@ import LeaderBoard from "../screens/LeaderBoard";
 import LeaderBoardProfile from "../screens/LeaderBoard";
 import Login from "../screens/Login";
 import Agreement from "../screens/Agreement";
+import SearchUser from "../screens/SearchUser";
+import Profile from "../screens/Profile";
 
 const { width } = Dimensions.get("screen");
 
@@ -145,7 +147,7 @@ function SettingsStack(props) {
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="NotificationsSettings"
                 component={NotificationsScreen}
                 options={{
@@ -154,7 +156,7 @@ function SettingsStack(props) {
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
-            />
+            /> */}
             {/* <Stack.Screen
                 name="Cart"
                 component={Cart}
@@ -231,6 +233,26 @@ function LeaderBoardStack(props) {
                 }}
             />
             <Stack.Screen
+                name="Give Hearts"
+                component={SearchUser}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header back title="Give Hearts" scene={scene} navigation={navigation} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" },
+                }}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header title="Profile" back white transparent navigation={navigation} scene={scene} />
+                    ),
+                    headerTransparent: true,
+                }}
+            />
+            {/* <Stack.Screen
                 name="Notifications"
                 component={NotificationsStack}
                 options={{
@@ -239,8 +261,8 @@ function LeaderBoardStack(props) {
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
-            />
-            <Stack.Screen
+            /> */}
+            {/* <Stack.Screen
                 name="Cart"
                 component={Cart}
                 options={{
@@ -249,7 +271,7 @@ function LeaderBoardStack(props) {
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
-            />
+            /> */}
         </Stack.Navigator>
     );
 }
@@ -257,7 +279,7 @@ function LeaderBoardStack(props) {
 function ProfileStack(props) {
     return (
         <Stack.Navigator
-            initialRouteName="Profile"
+            initialRouteName="MyProfile"
             screenOptions={{
                 mode: "card",
                 headerShown: "screen",
@@ -268,13 +290,23 @@ function ProfileStack(props) {
                 component={Profile}
                 options={{
                     header: ({ navigation, scene }) => (
-                        <Header transparent white title="MyProfile" navigation={navigation} scene={scene} />
+                        <Header title="Profile" back white transparent navigation={navigation} scene={scene} />
                     ),
-                    cardStyle: { backgroundColor: "#FFFFFF" },
                     headerTransparent: true,
                 }}
             />
+
             <Stack.Screen
+                name="MyProfile"
+                component={MyProfile}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header title="My Profile" back white transparent navigation={navigation} scene={scene} />
+                    ),
+                    headerTransparent: true,
+                }}
+            />
+            {/* <Stack.Screen
                 name="Cart"
                 component={Cart}
                 options={{
@@ -283,7 +315,7 @@ function ProfileStack(props) {
                     ),
                     cardStyle: { backgroundColor: "#FFFFFF" },
                 }}
-            />
+            /> */}
             <Stack.Screen
                 name="Notifications"
                 component={NotificationsStack}
@@ -295,8 +327,8 @@ function ProfileStack(props) {
                 }}
             />
             <Stack.Screen
-                name="Cart"
-                component={Cart}
+                name="Give Hearts"
+                component={SearchUser}
                 options={{
                     header: ({ navigation, scene }) => (
                         <Header back title="Give Hearts" scene={scene} navigation={navigation} />
@@ -369,12 +401,32 @@ function HomeStack(props) {
                     headerTransparent: true,
                 }}
             /> */}
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="CommunityPost"
                 component={CommunityPost}
                 options={{
                     header: ({ navigation, scene }) => (
                         <Header title="" back white transparent navigation={navigation} scene={scene} />
+                    ),
+                    headerTransparent: true,
+                }}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header title="Profile" back white transparent navigation={navigation} scene={scene} />
+                    ),
+                    headerTransparent: true,
+                }}
+            />
+            <Stack.Screen
+                name="MyProfile"
+                component={MyProfile}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header title="My Profile" back white transparent navigation={navigation} scene={scene} />
                     ),
                     headerTransparent: true,
                 }}
@@ -398,7 +450,7 @@ function HomeStack(props) {
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
-            /> */}
+            />
             <Stack.Screen
                 name="Search"
                 component={Search}
@@ -420,8 +472,8 @@ function HomeStack(props) {
                 }}
             /> */}
             <Stack.Screen
-                name="Cart"
-                component={Cart}
+                name="Give Hearts"
+                component={SearchUser}
                 options={{
                     header: ({ navigation, scene }) => (
                         <Header back title="Give Hearts" scene={scene} navigation={navigation} />
@@ -429,7 +481,7 @@ function HomeStack(props) {
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="Notifications"
                 component={NotificationsStack}
                 options={{
@@ -438,7 +490,7 @@ function HomeStack(props) {
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
-            />
+            /> */}
         </Stack.Navigator>
     );
 }
@@ -537,8 +589,29 @@ function AppStack(props) {
                     headerShown: false,
                 }}
             />
+            <Drawer.Screen
+                name="Give Hearts"
+                component={SearchUser}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Drawer.Screen
+                name="My Profile"
+                component={MyProfile}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Drawer.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    headerShown: false,
+                }}
+            />
         </Drawer.Navigator>
-    );
+    );  
 }
 
 export default function OnboardingStack(props) {

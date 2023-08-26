@@ -1,12 +1,13 @@
 import React from "react";
 import { withNavigation } from "@react-navigation/compat";
 import PropTypes from "prop-types";
-import { StyleSheet, Image, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, Image, TouchableWithoutFeedback, TouchableOpacity} from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
-import { argonTheme } from "../constants";
 
-class Card extends React.Component {
+import { Images, argonTheme } from "../constants";
+
+class UserCard extends React.Component {
     render() {
         const { navigation, item, horizontal, full, style, ctaColor, imageStyle, ctaRight } = this.props;
 
@@ -16,61 +17,90 @@ class Card extends React.Component {
             styles.imageContainer,
             horizontal ? styles.horizontalStyles : styles.verticalStyles,
             styles.shadow,
-        ]
+        ];
         // console.log(item)
-        ;
 
-        return (
+        return ( 
             <Block row={horizontal} card flex style={cardContainer}>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { product: item })}>
-                    <Block flex style={imgContainer}>
-                        <Image source={{ uri: item.image }} style={imageStyles} />
+                <TouchableWithoutFeedback onPress={() =>                     
+                {
+                        
+                        navigation.navigate("Profile", { user: item })
+                    }
+                    }>
+                    <Block flex middle style={[styles.avatarContainer,imgContainer]}>
+                        {/* <Image source={{ uri: item.image }} style={styles.avatar} /> */}
+                        <Image source={Images.ProfilePicture2} style={styles.avatar} />
                     </Block>
                 </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { product: item })}>
+                <TouchableWithoutFeedback onPress={() =>
+                    
+                    {
+                        
+                        navigation.navigate("Profile", { user: item })
+                        
+                    }
+                    
+                    }>
                     <Block flex space="between" style={styles.cardDescription}>
                         <Block flex>
                             <Text
-                                style={[styles.cardTitle, { fontFamily: "open-sans-regular" }]}
+                                bold
+                                style={[styles.cardTitle, { fontFamily: "open-sans-bold" }]}
                                 size={14}
                                 // style={styles.cardTitle}
                                 color={argonTheme.COLORS.TEXT}
                             >
-                                {item.title}
+                                {item.lastName} {item.firstName}
                             </Text>
-                            {item.body ? (
+                            {item.username ? (
                                 <Block flex left>
                                     <Text
                                         style={{ fontFamily: "open-sans-regular" }}
                                         size={12}
                                         color={argonTheme.COLORS.TEXT}
                                     >
-                                        {item.body}
+                                        @{item.username}
                                     </Text>
                                 </Block>
                             ) : (
                                 <Block />
                             )}
+                            <Text
+                                style={[styles.cardTitle, { fontFamily: "open-sans-regular" }]}
+                                size={12}
+                                // style={styles.cardTitle}
+                                color={argonTheme.COLORS.TEXT}
+                            >
+                                District: {item.district}
+                            </Text>
                         </Block>
-                        <Block right={ctaRight ? true : false}>
+                        {/* <Block right={ctaRight ? true : false}>
                             <Text
                                 style={{ fontFamily: "open-sans-bold" }}
                                 size={12}
                                 muted={!ctaColor}
                                 color={ctaColor || argonTheme.COLORS.ACTIVE}
-                                bold
+                                b
                             >
                                 {item.cta}
                             </Text>
-                        </Block>
+                        </Block> */}
+
                     </Block>
                 </TouchableWithoutFeedback>
+                <TouchableOpacity onPress={() => navigation.navigate("Profile", { user: item })}>
+                    <Block flex middle style={[styles.avatarContainer,imgContainer]}>
+                        {/* <Image source={{ uri: item.image }} style={styles.avatar} /> */}
+                        <Image source={Images.ProfileGiveHand} style={styles.giveHearts} />
+                    </Block>
+                </TouchableOpacity>
             </Block>
         );
     }
 }
 
-Card.propTypes = {
+UserCard.propTypes = {
     item: PropTypes.object,
     horizontal: PropTypes.bool,
     full: PropTypes.bool,
@@ -91,6 +121,7 @@ const styles = StyleSheet.create({
         // flex: 1,
         // flexWrap: "wrap",
         paddingBottom: 6,
+        
     },
     cardDescription: {
         padding: theme.SIZES.BASE / 2,
@@ -99,6 +130,7 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         elevation: 1,
         overflow: "hidden",
+        marginRight: 15,
     },
     image: {
         // borderRadius: 3,
@@ -125,6 +157,21 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         elevation: 2,
     },
+    avatarContainer: {
+        position: "relative",
+    },
+    avatar: {
+        width: 100,
+        height: 100,
+        // borderRadius: 62,
+        borderRadius: 20,
+        borderWidth: 0,
+    },
+    giveHearts: {
+        width: 70,
+        height: 70,
+    }
+
 });
 
-export default withNavigation(Card);
+export default withNavigation(UserCard);

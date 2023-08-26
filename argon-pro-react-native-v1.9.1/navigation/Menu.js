@@ -18,6 +18,7 @@ function CustomDrawerContent({
   drawerPosition,
   navigation,
   profile,
+  myProfile,
   focused,
   state,
   ...rest
@@ -28,8 +29,7 @@ function CustomDrawerContent({
     { title: "My Profile", navigateTo: "ProfileDrawer" },
     { title: "LeaderBoard", navigateTo: "LeaderBoard" },
     // { title: "Elements", navigateTo: "ElementsDrawer" },
-    // { title: "Articles", navigateTo: "ArticlesDrawer" },
-  
+    // { title: "Articles", navigateTo: "ArticlesDrawer" },h
     { title: "Settings", navigateTo: "SettingsDrawer" },
     { title: "Log In", navigateTo: "Login" },
   ];

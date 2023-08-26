@@ -9,6 +9,8 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 import { Block, Text, Input, theme } from "galio-framework";
+import users from "../constants/users";
+import UserCard from "../components/UserCard";
 
 const { width } = Dimensions.get("screen");
 
@@ -16,11 +18,11 @@ import { articles, categories, argonTheme } from "../constants";
 import { Icon, Card } from "../components";
 
 const suggestions = [
-  { id: "CommunityVisits", title: "Community Visits", image: categories["community"] },
-  { id: "ElderlyAssistance", title: "Elderly Assistance", image: categories["elderlyAssistance"] },
+  { id: "Spiderman", title: "Your Friendly NeighbourHood SpiderMan", image: categories["community"] },
+  { id: "Spiderwoman", title: "Your Friendly NeighbourHood SpiderWoman", image: categories["elderlyAssistance"] },
 ];
 
-export default class Search extends React.Component {
+export default class SearchUser extends React.Component {
   state = {
     results: [],
     search: "",
@@ -40,8 +42,8 @@ export default class Search extends React.Component {
   }
 
   handleSearchChange = search => {
-    const results = articles.filter(
-      item => search && item.title.toLowerCase().includes(search)
+    const results = users.filter(
+      item => search && item.username.toLowerCase().includes(search)
     );
     this.setState({ results, search });
     this.animate();
@@ -77,7 +79,7 @@ export default class Search extends React.Component {
         iconContent={iconSearch}
         defaultValue={search}
         style={[styles.search, this.state.active ? styles.shadow : null]}
-        placeholder="What are you looking for?"
+        placeholder="Who are you looking for?"
         onFocus={() => this.setState({ active: true })}
         onBlur={() => this.setState({ active: false })}
         onChangeText={this.handleSearchChange}
@@ -93,7 +95,7 @@ export default class Search extends React.Component {
         </Text>
 
         <Text size={18} style={{ marginTop: theme.SIZES.BASE, fontFamily: 'open-sans-regular' }} color={argonTheme.COLORS.TEXT}>
-          You can see more posts from other categories.
+          You can find users by searching for their username.
         </Text>
       </Block>
     );
@@ -133,13 +135,19 @@ export default class Search extends React.Component {
       >
         <Block flex>
           <Block flex row>
-            <Card
-              item={articles[1]}
+            <UserCard
+              item={users[1]}
               style={{ marginRight: theme.SIZES.BASE }}
             />
-            <Card item={articles[2]} />
+            <UserCard item={users[2]} />
           </Block>
-          <Card item={articles[0]} horizontal />
+          <Block flex row>
+            <UserCard
+              item={users[3]}
+              style={{ marginRight: theme.SIZES.BASE }}
+            />
+            <UserCard item={users[4]} />
+          </Block>
         </Block>
       </ScrollView>
     );
@@ -157,7 +165,7 @@ export default class Search extends React.Component {
         style={{ width: width - theme.SIZES.BASE * 2, opacity }}
         key={`result-${result.title}`}
       >
-        <Card item={result} horizontal />
+        <UserCard item={result} horizontal />
       </Animated.View>
     );
   };

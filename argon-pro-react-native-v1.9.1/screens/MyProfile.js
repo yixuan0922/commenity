@@ -7,6 +7,8 @@ import { Images, argonTheme } from "../constants";
 import articles from "../constants/articles";
 import { HeaderHeight } from "../constants/utils";
 import { Icon, Card } from "../components";
+//importing user data from constants
+import user from "../constants/user";
 
 class CommunityPost extends React.Component {
     render() {
@@ -30,7 +32,7 @@ const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
-class Profile extends React.Component {
+class MyProfile extends React.Component {
     render() {
         const { navigation } = this.props;
 
@@ -110,14 +112,14 @@ class Profile extends React.Component {
                                 <Block flex>
                                     <Block middle style={styles.nameInfo}>
                                         <Text style={{ fontFamily: "open-sans-regular" }} size={28} color="#32325D">
-                                            Jessica Jones
+                                            {user[0].firstName} {user[0].lastName}
                                         </Text>
                                         <Text
                                             size={14}
                                             color="#32325D"
                                             style={{ marginTop: 10, fontFamily: "open-sans-light" }}
                                         >
-                                            MeUnity
+                                            @{user[0].username}
                                         </Text>
                                         <Text
                                             size={16}
@@ -125,13 +127,13 @@ class Profile extends React.Component {
                                             style={{ marginTop: 10, fontFamily: "open-sans-light" }}
                                         >
                                             <Icon name="location-on" family="MaterialIcons" size={14} color={"black"} />
-                                            &nbsp; Woodlands, Woodgrove
+                                            &nbsp; {user[0].district}
                                         </Text>
                                     </Block>
 
                                     <Block flex space="evenly" row style={{ marginTop: 40 }}>
                                         <Block middle>
-                                            <Text h4>380</Text>
+                                            <Text h4>{user[0].heartsReceived}</Text>
                                             <Text>hearts received</Text>
                                         </Block>
                                         {/* <Block middle>
@@ -140,7 +142,7 @@ class Profile extends React.Component {
                                             </TouchableOpacity>
                                         </Block> */}
                                         <Block middle>
-                                            <Text h4>380</Text>
+                                            <Text h4>{user[0].heartsGiven}</Text>
                                             <Text>hearts given</Text>
                                         </Block>
                                     </Block>
@@ -282,4 +284,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Profile;
+export default MyProfile;

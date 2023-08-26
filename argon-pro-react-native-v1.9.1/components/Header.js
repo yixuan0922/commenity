@@ -22,7 +22,7 @@ const BellButton = ({ isWhite, style, navigation }) => (
 
 // route to create new postx
 const BasketButton = ({ isWhite, style, navigation }) => (
-    <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate("Cart")}>
+    <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate("Give Hearts")}>
         <Icon family="AntDesign" size={19} name="heart" color={argonTheme.COLORS[isWhite ? "WHITE" : "ICON"]} />
     </TouchableOpacity>
 );
@@ -157,7 +157,7 @@ class Header extends React.Component {
                             name={back ? "chevron-left" : "menu"}
                             family="entypo"
                             // name={back ? 'nav-left' : "menu-8"} family="ArgonExtra"
-                            size={back ? 40 : 30}
+                            size={back ? 30 : 30}
                             onPress={this.handleLeftPress}
                             color={iconColor || (white ? argonTheme.COLORS.WHITE : argonTheme.COLORS.ICON)}
                             style={{ marginTop: 2 }}
