@@ -54,6 +54,7 @@ class LeaderBoard extends React.Component {
                                     <Block flex>
                                         <Block middle style={styles.avatarContainer}>
                                             <Image source={Images.redhill} style={styles.avatarSecond} />
+                                            <Block middle style={styles.scoring}><Text>2</Text></Block>
                                         </Block>
                                         <Block middle style={styles.nameInfo}>
                                             <Text style={{ fontFamily: "open-sans-bold" }} size={15} color="#32325D">
@@ -71,6 +72,7 @@ class LeaderBoard extends React.Component {
                                     <Block flex>
                                         <Block middle style={styles.avatarContainer}>
                                             <Image source={Images.redhill} style={styles.avatarFirst} />
+                                            <Block middle style={styles.scoringFirst}><Text>1</Text></Block>
                                         </Block>
                                         <Block middle style={styles.nameInfo}>
                                             <Text style={{ fontFamily: "open-sans-bold" }} size={15} color="#32325D">
@@ -87,7 +89,8 @@ class LeaderBoard extends React.Component {
                                     </Block> 
                                     <Block flex>
                                         <Block middle style={styles.avatarContainer}>
-                                            <Image source={Images.bukitPanjang} style={styles.avatarThird} />
+                                            <Image source={Images.bukitPanjang} style={styles.avatarThird} /> 
+                                            <Block middle style={styles.scoring}><Text>3</Text></Block>
                                         </Block>
                                         <Block middle style={styles.nameInfo}>
                                             <Text style={{ fontFamily: "open-sans-bold" }} size={15} color="#32325D">
@@ -183,11 +186,31 @@ const styles = StyleSheet.create({
     info: {
         paddingHorizontal: 40,
     },
+    scoring: {
+        backgroundColor: 'lightgrey',
+        borderRadius: 25,
+        height: 25,
+        width: 25,
+        position: "absolute",
+        top: 9,
+        right: 12,
+        marginTop: 35,
+    },
+    scoringFirst: {
+        backgroundColor: 'lightgrey',
+        borderRadius: 25,
+        height: 25,
+        width: 25,
+        position: "absolute",
+        top: 9,
+        right: 12,
+        marginTop: -15
+    },
     avatarContainer: {
         position: "relative",
         marginTop: -50,
     },
-    avatarFirst: {
+    avatarFirst: {  
         width: 100,
         height: 100,
         borderRadius: 62,
