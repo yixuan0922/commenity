@@ -31,7 +31,7 @@ const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
-class Profile extends React.Component {
+export default class Profile extends React.Component {
     // Add a state variable to control the visibility of the popup
   state = {
     selectedSize: null,
@@ -44,14 +44,11 @@ class Profile extends React.Component {
       isPopupVisible: !prevState.isPopupVisible,
     }));
   };
-    render() {
-        const { navigation } = this.props;
-        const { selectedSize, isPopupVisible } = this.state;
-export default class Profile extends React.Component {
 
     renderInformation = () => {
         const { navigation, route } = this.props;
         const user = route.params?.user;
+        const { selectedSize, isPopupVisible } = this.state;
 
 
         return (
