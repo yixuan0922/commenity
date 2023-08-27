@@ -56,7 +56,7 @@ class Header extends React.Component {
             case "Category":
             case "Profile":
             case "Product":
-            case "Search":
+            // case "Search":
             case "Settings":
             case "LeaderBoard":
                 return [
@@ -163,7 +163,7 @@ class Header extends React.Component {
                             style={{ marginTop: 2 }}
                         />
                     }
-                    leftStyle={{ paddingVertical: 12, flex: 0.2 }}
+                    leftStyle={{ flex: 0.2 }}
                     titleStyle={[
                         styles.title,
                         { color: argonTheme.COLORS[white ? "WHITE" : "HEADER"], marginLeft: 20 },
