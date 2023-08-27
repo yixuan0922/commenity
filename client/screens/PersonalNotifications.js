@@ -35,10 +35,10 @@ export default class PersonalNotifications extends React.Component {
     super(props);
     this.state = {
       requestType:'help',
-      title: '',
+      title: "",
       message: '',
       userName: 'dembouz', //temporary
-      district: "yishun",
+      district: "Yishun",
       
     };
 
@@ -93,9 +93,6 @@ export default class PersonalNotifications extends React.Component {
 
   render() {
 
-    const {route} = this.props;
-    console.log(route);
-
 
     return (
       <Block flex center>
@@ -116,7 +113,7 @@ export default class PersonalNotifications extends React.Component {
           <Input
             placeholder="Title of your community alert"
             value={this.title}
-            onChangeText={value => this.handleChange('name', value)}
+            onChangeText={value => this.handleChange('title', value)}
             style={styles.input}
             color = "black"
           />

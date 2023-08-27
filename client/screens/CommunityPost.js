@@ -16,6 +16,8 @@ import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
 import { iPhoneX, HeaderHeight } from "../constants/utils";
 
+import articles from "../constants/articles"
+
 const { height, width } = Dimensions.get("window");
 
 export default class CommunityPost extends React.Component {
@@ -29,8 +31,12 @@ export default class CommunityPost extends React.Component {
         const { navigation, route } = this.props;
         // const { params } = navigation && navigation.state;
         // const product = params.product;
+        console.log(route.params);
         const product = route.params?.product;
-        const productImages = [product.image, product.image, product.image, product.image];
+        console.log(product);
+        // const productImages = [product.image, product.image, product.image, product.image];
+        const productImages = [];
+        articles.forEach(el=>productImages.push(el.image));
 
         return (
             <ScrollView
@@ -59,55 +65,6 @@ export default class CommunityPost extends React.Component {
         );
     };
 
-    renderProgress = () => {
-        const { navigation, route } = this.props;
-        // const { params } = navigation && navigation.state;
-        // const product = params.product;
-        const product = route.params?.product;
-        const productImages = [product.image, product.image, product.image, product.image];
-
-        const position = Animated.divide(this.scrollX, width);
-
-        return (
-            <Block row>
-                {productImages.map((_, i) => {
-                    const opacity = position.interpolate({
-                        inputRange: [i - 1, i, i + 1],
-                        outputRange: [0.5, 1, 0.5],
-                        extrapolate: "clamp",
-                    });
-
-                    const width = position.interpolate({
-                        inputRange: [i - 1, i, i + 1],
-                        outputRange: [8, 18, 8],
-                        extrapolate: "clamp",
-                    });
-
-                    return <Animated.View key={i} style={[styles.dots, { opacity, width }]} />;
-                })}
-            </Block>
-        );
-    };
-
-    renderSize = (label) => {
-        const active = this.state.selectedSize === label;
-
-        return (
-            <TouchableHighlight
-                style={styles.sizeButton}
-                underlayColor={argonTheme.COLORS.PRICE_COLOR}
-                onPress={() => this.setState({ selectedSize: label })}
-            >
-                <Text
-                    style={{ fontFamily: "open-sans-regular" }}
-                    color={active ? theme.COLORS.PRIMARY : argonTheme.COLORS.TEXT}
-                >
-                    {label}
-                </Text>
-            </TouchableHighlight>
-        );
-    };
-
     renderChatButton = () => {
         const { navigation } = this.props;
         return (
@@ -130,15 +87,15 @@ export default class CommunityPost extends React.Component {
         const { navigation, route } = this.props;
         // const { params } = navigation && navigation.state;
         // const product = params.product;
-        const product = route.params?.product;
+        const product = route.params?.post;
 
         return (
             <Block flex style={styles.communitypost}>
                 <Block flex style={{ position: "relative" }}>
                     {this.renderGallery()}
-                    <Block center style={styles.dotsContainer}>
+                    {/* <Block center style={styles.dotsContainer}>
                         {this.renderProgress()}
-                    </Block>
+                    </Block> */}
                 </Block>
                 <Block flex style={styles.options}>
                     {this.renderChatButton()}
@@ -191,7 +148,7 @@ export default class CommunityPost extends React.Component {
                                 paddingBottom: theme.SIZES.BASE * 3,
                             }}
                         >
-                            <Text>{product.content}</Text>
+                            <Text>{product.message}</Text>
                         </Block>
                     </ScrollView>
                 </Block>

@@ -22,12 +22,12 @@ class Card extends React.Component {
 
         return (
             <Block row={horizontal} card flex style={cardContainer}>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { product: item })}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { post: item })}>
                     <Block flex style={imgContainer}>
                         <Image source={{ uri: articles[idx%(articles.length)].image }} style={imageStyles} />
                     </Block>
                 </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { product: item })}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { post: item })}>
                     <Block flex space="between" style={styles.cardDescription}>
                         <Block flex>
                             <Text
