@@ -85,6 +85,14 @@ export default class PersonalNotifications extends React.Component {
     .catch(error => {
       console.error('Error:', error);
     });
+
+    this.setState({
+      title: "",
+      message: "",
+      userName: "",
+      requestType: "",
+      district: "",
+    })
   
   };
 
@@ -112,7 +120,7 @@ export default class PersonalNotifications extends React.Component {
           <Text h4 >Tell us about your post.</Text>
           <Input
             placeholder="Title of your community alert"
-            value={this.title}
+            value={this.state.title}
             onChangeText={value => this.handleChange('title', value)}
             style={styles.input}
             color = "black"
@@ -123,7 +131,7 @@ export default class PersonalNotifications extends React.Component {
             placeholder={this.state.requestType === "help" ? "Please describe the help you need"
             :
             "Please tell us how you would like to help the community!"}
-            value={this.message}
+            value={this.state.message}
             onChangeText={value => this.handleChange('message', value)}
             multiline
             style={styles.multilineInput}

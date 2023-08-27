@@ -59,7 +59,7 @@ const getAllUsers = async (req, res) => {
 const updateUser = async (req, res) => {
   const {
     body: {
-      username,
+      id,
       firstName,
       lastName,
       district,
@@ -74,7 +74,7 @@ const updateUser = async (req, res) => {
     const currentData = (await userRef.get()).data() || {};
 
     const newUserObj = {
-      username: username || currentData.username,
+      id: id || currentData.id,
       firstName: firstName || currentData.firstName,
       lastName: lastName || currentData.lastName,
       district: district || currentData.district,
