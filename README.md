@@ -1,7 +1,7 @@
 # commenity
 
 
-The backend is deployed and executed via Firebase Cloud Functions.
+The backend is an Express app deployed and executed via Firebase Cloud Functions.
 
 Run all code from the the branch titled "server"!! (sorry)
 
