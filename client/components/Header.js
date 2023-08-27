@@ -15,7 +15,7 @@ const iPhoneX = () => Platform.OS === "ios" && (height === 812 || width === 812 
 // route to create new post
 const BellButton = ({ isWhite, style, navigation }) => (
     <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate("Notifications")}>
-        <Icon family="Ionicons" size={16} name="add-circle" color={argonTheme.COLORS[isWhite ? "WHITE" : "ICON"]} />
+        <Icon family="Ionicons" size={26} name="add-circle" color={argonTheme.COLORS[isWhite ? "WHITE" : "ICON"]} />
         {/* <Block middle style={styles.notify} /> */}
     </TouchableOpacity>
 );

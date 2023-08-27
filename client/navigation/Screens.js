@@ -152,6 +152,8 @@ function SettingsStack(props) {
                         <Header back title="Requests" scene={scene} navigation={navigation} />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
+
+                    headerShown: false,
                 }}
             />
             <Stack.Screen
@@ -273,7 +275,6 @@ function ProfileStack(props) {
                     cardStyle: { backgroundColor: "#FFFFFF" },
                 }}
             />
-            
         </Stack.Navigator>
     );
 }

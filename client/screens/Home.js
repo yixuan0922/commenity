@@ -12,109 +12,101 @@ import argonTheme from "../constants/Theme";
 import articles from "../constants/articles";
 
 class Home extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
-          responseData: null,
-          isLoading: true
+            responseData: null,
+            isLoading: true,
         };
-    
-      }
-    
+    }
 
-    fetchArticles(){
+    fetchArticles() {
         const url = "https://us-central1-commenity-edc7c.cloudfunctions.net/app/";
-        const headers =  {
-            'Content-Type': 'application/json',
+        const headers = {
+            "Content-Type": "application/json",
         };
 
         fetch("https://us-central1-commenity-edc7c.cloudfunctions.net/app/?district=Yishun")
-        .then(data => data.json())
-        .then(data => 
-            {
+            .then((data) => data.json())
+            .then((data) => {
                 this.setState({
                     responseData: data,
-                    isLoading: false
-                })
-            }
-            )
-        .catch(error => {
-            this.setState({
-                responseData:null,
-                isLoading: true
+                    isLoading: false,
+                });
             })
-            console.error('Error:', error);
-          });
-
-    
+            .catch((error) => {
+                this.setState({
+                    responseData: null,
+                    isLoading: true,
+                });
+                console.error("Error:", error);
+            });
     }
-
 
     componentDidMount() {
         this.fetchArticles();
-        this.focusListener = this.props.navigation.addListener('focus', () => {
+        this.focusListener = this.props.navigation.addListener("focus", () => {
             this.fetchArticles();
-          });
+        });
     }
 
     componentWillUnmount() {
         // Clean up the listener when the component is unmounted
         this.focusListener && this.focusListener();
-      }
+    }
 
     renderArticles = () => {
         return (
-            <>
+            <Block center>
                 {/* // Articles rendered (Paste json file here) */}
 
-                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.articles}>
+                <ScrollView
+                    style={{ marginBottom: 100 }}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={styles.articles}
+                >
                     <Block flex>
                         {this.state.isLoading && <Text h4>Please wait while we get the posts...</Text>}
-                        {(this.state.responseData && !this.state.isLoading)&& this.state.responseData.map((el,idx)=><Card item = {this.state.responseData[idx]} idx = {idx} horizontal></Card>)}
+                        {this.state.responseData &&
+                            !this.state.isLoading &&
+                            this.state.responseData.map((el, idx) => (
+                                <Card item={this.state.responseData[idx]} idx={idx} horizontal></Card>
+                            ))}
                     </Block>
                 </ScrollView>
-            </>
+            </Block>
         );
     };
 
     renderCommunity = () => {
         return (
             <Block
-                flex
                 row
+                middle
                 style={{
-                    // alignItems: "center",
-                    // justifyContent: "center",
-                    // borderWidth: 5,
-                    marginTop: 0,
-                    marginBottom: 0,
-                    minHeight: 50,
-                    bottom: 50
+                    marginTop: 20,
+                    marginBottom: 20,
                 }}
             >
-                <Block flex={0.9} row center>
-                    <Icon family="Foundation" size={16} name="marker" color={argonTheme.COLORS.ICON} />
-                    <Text h6 bold style={{ marginLeft: 25 }}>
-                        {user[0].district}
-                    </Text>
-                </Block>
+                {/* <Block flex={0.9} row center> */}
+                <Icon family="Foundation" size={26} name="marker" color={argonTheme.COLORS.ICON} />
+                <Text h6 bold style={{ marginLeft: 25 }}>
+                    {user[0].district}
+                </Text>
+                {/* </Block> */}
             </Block>
         );
     };
 
     render() {
         return (
-            <Block flex center style={styles.home}>
+            <Block style={styles.home}>
                 {this.renderCommunity()}
                 {this.renderArticles()}
             </Block>
         );
     }
 }
-
-
-
 
 const styles = StyleSheet.create({
     home: {

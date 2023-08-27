@@ -24,15 +24,15 @@ class Card extends React.Component {
             <Block row={horizontal} card flex style={cardContainer}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { post: item })}>
                     <Block flex style={imgContainer}>
-                        <Image source={{ uri: articles[idx%(articles.length)].image }} style={imageStyles} />
+                        <Image source={{ uri: articles[idx % articles.length].image }} style={imageStyles} />
                     </Block>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { post: item })}>
                     <Block flex space="between" style={styles.cardDescription}>
                         <Block flex>
                             <Text
-                                style={[styles.cardTitle, { fontFamily: "open-sans-regular" }]}
-                                size={14}
+                                style={[styles.cardTitle, { fontFamily: "open-sans-bold" }]}
+                                size={16}
                                 // style={styles.cardTitle}
                                 color={argonTheme.COLORS.TEXT}
                             >
@@ -42,8 +42,10 @@ class Card extends React.Component {
                                 <Block flex left>
                                     <Text
                                         style={{ fontFamily: "open-sans-regular" }}
-                                        size={12}
+                                        size={13}
                                         color={argonTheme.COLORS.TEXT}
+                                        numberOfLines={5} // Set the number of lines you want to display before ellipsis
+                                        ellipsizeMode="tail" // Set to "tail" to show ellipsis at the end
                                     >
                                         {item.message}
                                     </Text>
@@ -52,30 +54,52 @@ class Card extends React.Component {
                                 <Block />
                             )}
                         </Block>
-                        <Block >
-                            <Text
+                        <Block row style={{ justifyContent: "space-between", alignItems: "center" }}>
+                            {item.requestType.toLowerCase() === "help" ? (
+                                <Text
+                                    style={{
+                                        fontFamily: "open-sans-bold",
+                                        borderRadius: 20,
+                                        padding: 5,
+                                        backgroundColor: "#ffc4c4",
+                                        fontSize: 10,
+                                        color: "red",
+                                    }}
+                                    size={12}
+                                    muted={!ctaColor}
+                                    color={ctaColor || argonTheme.COLORS.ACTIVE}
+                                    bold
+                                >
+                                    Help Request
+                                </Text>
+                            ) : (
+                                <Text
+                                    style={{
+                                        fontFamily: "open-sans-bold",
+                                        borderRadius: 20,
+                                        padding: 5,
+                                        backgroundColor: "#cfffc4",
+                                        fontSize: 10,
+                                        color: "green",
+                                    }}
+                                    size={12}
+                                    muted={!ctaColor}
+                                    color={ctaColor || argonTheme.COLORS.ACTIVE}
+                                    bold
+                                >
+                                    Give Request
+                                </Text>
+                            )}
+
+                            {/* <Text
                                 style={{ fontFamily: "open-sans-bold" }}
-                                size={12}
+                                size={15}
                                 muted={!ctaColor}
                                 color={ctaColor || argonTheme.COLORS.ACTIVE}
                                 bold
                             >
-                                {item.requestType.toLowerCase() === "help" ? 
-                                <Text style = {{"fontSize":"10", color: "red"}}>Help Request</Text>
-                                : 
-                                <Text style = {{"fontSize":"10", color: "green"}}>Give Request</Text>}
-                            </Text>
-                        </Block>
-                        <Block right={ctaRight ? true : false}>
-                            <Text
-                                style={{ fontFamily: "open-sans-bold" }}
-                                size={12}
-                                muted={!ctaColor}
-                                color={ctaColor || argonTheme.COLORS.ACTIVE}
-                                bold
-                            >
-                                <Text h6>View Post</Text>
-                            </Text>
+                                View Post
+                            </Text> */}
                         </Block>
                     </Block>
                 </TouchableWithoutFeedback>
@@ -98,8 +122,9 @@ const styles = StyleSheet.create({
         backgroundColor: theme.COLORS.WHITE,
         marginVertical: theme.SIZES.BASE,
         borderWidth: 0,
-        minHeight: 114,
-        marginBottom: 4,
+        minHeight: 115,
+        maxHeight: 400,
+        marginBottom: 5,
     },
     cardTitle: {
         // flex: 1,
@@ -118,7 +143,8 @@ const styles = StyleSheet.create({
         // borderRadius: 3,
     },
     horizontalImage: {
-        height: 122,
+        resizeMode: "cover",
+        height: 200,
         width: "auto",
     },
     horizontalStyles: {
