@@ -10,16 +10,17 @@ const { width } = Dimensions.get("screen");
 import argonTheme from "../constants/Theme";
 
 class Home extends React.Component {
-    renderArticles = () => {
+    
+    renderArticles = () => {const articleComponents = articles.map((article, index) => (
+        <Card key={index} item={article} horizontal    />
+    ));
         return (
             <>
                 {/* // Articles rendered (Paste json file here) */}
 
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.articles}>
                     <Block flex>
-                        <Card item={articles[0]} horizontal />
-                        <Card item={articles[1]} horizontal />
-                        <Card item={articles[2]} horizontal />
+                        {articleComponents}
                         {/* <Card item={articles[3]} horizontal /> */}
                         {/* <Block flex row>
             <Card
@@ -65,6 +66,7 @@ class Home extends React.Component {
             <Block flex center style={styles.home}>
                 {this.renderCommunity()}
                 {this.renderArticles()}
+                
             </Block>
         );
     }
