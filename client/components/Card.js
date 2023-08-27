@@ -10,7 +10,7 @@ import articles from "../constants/articles";
 
 class Card extends React.Component {
     render() {
-        const { navigation, item, horizontal, full, style, ctaColor, imageStyle, ctaRight } = this.props;
+        const { navigation, item, horizontal, full, style, ctaColor, imageStyle, ctaRight, idx } = this.props;
 
         const imageStyles = [full ? styles.fullImage : styles.horizontalImage, imageStyle];
         const cardContainer = [styles.card, styles.shadow, style];
@@ -24,7 +24,7 @@ class Card extends React.Component {
             <Block row={horizontal} card flex style={cardContainer}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { product: item })}>
                     <Block flex style={imgContainer}>
-                        <Image source={{ uri: articles[Math.floor(Math.random()*articles.length)].image }} style={imageStyles} />
+                        <Image source={{ uri: articles[idx%(articles.length)].image }} style={imageStyles} />
                     </Block>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { product: item })}>
@@ -52,6 +52,20 @@ class Card extends React.Component {
                                 <Block />
                             )}
                         </Block>
+                        <Block >
+                            <Text
+                                style={{ fontFamily: "open-sans-bold" }}
+                                size={12}
+                                muted={!ctaColor}
+                                color={ctaColor || argonTheme.COLORS.ACTIVE}
+                                bold
+                            >
+                                {item.requestType.toLowerCase() === "help" ? 
+                                <Text style = {{"fontSize":"10", color: "red"}}>Help Request</Text>
+                                : 
+                                <Text style = {{"fontSize":"10", color: "green"}}>Give Request</Text>}
+                            </Text>
+                        </Block>
                         <Block right={ctaRight ? true : false}>
                             <Text
                                 style={{ fontFamily: "open-sans-bold" }}
@@ -60,7 +74,7 @@ class Card extends React.Component {
                                 color={ctaColor || argonTheme.COLORS.ACTIVE}
                                 bold
                             >
-                                View Post
+                                <Text h6>View Post</Text>
                             </Text>
                         </Block>
                     </Block>

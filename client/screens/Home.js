@@ -71,7 +71,7 @@ class Home extends React.Component {
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.articles}>
                     <Block flex>
                         {this.state.isLoading && <Text h4>Please wait while we get the posts...</Text>}
-                        {(this.state.responseData && !this.state.isLoading)&& this.state.responseData.map((el,idx)=><Card item = {this.state.responseData[idx]} horizontal></Card>)}
+                        {(this.state.responseData && !this.state.isLoading)&& this.state.responseData.map((el,idx)=><Card item = {this.state.responseData[idx]} idx = {idx} horizontal></Card>)}
                     </Block>
                 </ScrollView>
             </>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     },
     articles: {
         width: width - theme.SIZES.BASE * 2,
-        // paddingBottom: theme.SIZES.BASE * 4,
+        paddingBottom: theme.SIZES.BASE * 4,
         paddingHorizontal: 2,
     },
 });

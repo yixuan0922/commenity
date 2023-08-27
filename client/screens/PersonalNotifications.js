@@ -134,7 +134,7 @@ export default class PersonalNotifications extends React.Component {
           />
         </Block>
 
-        <Button round color="info" onPress={this.handleSubmit}>Submit</Button>
+        <Button round color= {argonTheme.COLORS.ACTIVE} onPress={this.handleSubmit}>Submit</Button>
       </Block>
     );
   }
