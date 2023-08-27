@@ -16,11 +16,8 @@ const ProfileGiveHand = require("../assets/imgs/profile-give-hand.png");
 const redhill = require("../assets/imgs/redhill.jpg");
 const bukitPanjang = require("../assets/imgs/bukitpanjang.jpg");
 
-const chickenRice = require("../assets/imgs/chicken_rice.jpg");
+const chicken_rice = require("../assets/imgs/chicken_rice.jpg");
 const door_to_door = require("../assets/imgs/door_to_door.jpg");
-
-
-
 
 // internet imgs
 const ProfileChat = "https://images.unsplash.com/photo-1500522144261-ea64433bbe27?fit=crop&w=1051&q=80";
@@ -76,6 +73,6 @@ export default {
     ProfileChat,
     redhill,
     bukitPanjang,
-    chickenRice,
-    door_to_door
+    chicken_rice,
+    door_to_door,
 };

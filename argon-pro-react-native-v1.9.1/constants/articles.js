@@ -3,7 +3,7 @@ export default [
         title: "Buy Food (Every Tuesday)",
         content:
             "I have an elderly aged 81 that will be home alone every Tuesday. I need help in buying food for her. Please contact me for more information @88888888.",
-        image: "chickenRice",
+        image: "chicken_rice",
         cta: "View Post",
         horizontal: true,
     },
