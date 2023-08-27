@@ -31,6 +31,49 @@ const { width, height } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
 
 class Profile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            responseData: null,
+            isLoading: true,
+        };
+    }
+
+    fetchArticles() {
+        const url = "https://us-central1-commenity-edc7c.cloudfunctions.net/app/";
+        const headers = {
+            "Content-Type": "application/json",
+        };
+
+        fetch("https://us-central1-commenity-edc7c.cloudfunctions.net/app/?district=Yishun")
+            .then((data) => data.json())
+            .then((data) => {
+                this.setState({
+                    responseData: data,
+                    isLoading: false,
+                });
+            })
+            .catch((error) => {
+                this.setState({
+                    responseData: null,
+                    isLoading: true,
+                });
+                console.error("Error:", error);
+            });
+    }
+
+    componentDidMount() {
+        this.fetchArticles();
+        this.focusListener = this.props.navigation.addListener("focus", () => {
+            this.fetchArticles();
+        });
+    }
+
+    componentWillUnmount() {
+        // Clean up the listener when the component is unmounted
+        this.focusListener && this.focusListener();
+    }
+
     render() {
         const { navigation } = this.props;
 
@@ -47,66 +90,8 @@ class Profile extends React.Component {
                                 <Block middle style={styles.avatarContainer}>
                                     <Image source={Images.ProfilePicture2} style={styles.avatar} />
                                 </Block>
-                                {/* <Block style={styles.info}>
-                                    <Block middle row space="evenly" style={{ marginTop: 20, paddingBottom: 24 }}>
-                                        <Button small style={{ backgroundColor: argonTheme.COLORS.INFO }}>
-                                            CONNECT
-                                        </Button>
-                                        <Button small style={{ backgroundColor: argonTheme.COLORS.DEFAULT }}>
-                                            MESSAGE
-                                        </Button>
-                                    </Block>
-                                    <Block row space="between">
-                                        <Block middle>
-                                            <Text
-                                                size={18}
-                                                color="#525F7F"
-                                                style={{ marginBottom: 4, fontFamily: "open-sans-bold" }}
-                                            >
-                                                2K
-                                            </Text>
-                                            <Text
-                                                style={{ fontFamily: "open-sans-regular" }}
-                                                size={12}
-                                                color={argonTheme.COLORS.TEXT}
-                                            >
-                                                Orders
-                                            </Text>
-                                        </Block>
-                                        <Block middle>
-                                            <Text
-                                                color="#525F7F"
-                                                size={18}
-                                                style={{ marginBottom: 4, fontFamily: "open-sans-bold" }}
-                                            >
-                                                10
-                                            </Text>
-                                            <Text
-                                                style={{ fontFamily: "open-sans-regular" }}
-                                                size={12}
-                                                color={argonTheme.COLORS.TEXT}
-                                            >
-                                                Photos
-                                            </Text>
-                                        </Block>
-                                        <Block middle>
-                                            <Text
-                                                color="#525F7F"
-                                                size={18}
-                                                style={{ marginBottom: 4, fontFamily: "open-sans-bold" }}
-                                            >
-                                                89
-                                            </Text>
-                                            <Text
-                                                style={{ fontFamily: "open-sans-regular" }}
-                                                size={12}
-                                                color={argonTheme.COLORS.TEXT}
-                                            >
-                                                Comments
-                                            </Text>
-                                        </Block>
-                                    </Block>
-                                </Block> */}
+
+                                {/* Text Content */}
                                 <Block flex>
                                     <Block middle style={styles.nameInfo}>
                                         <Text style={{ fontFamily: "open-sans-regular" }} size={28} color="#32325D">
@@ -149,58 +134,27 @@ class Profile extends React.Component {
                                     <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
                                         <Block style={styles.divider} />
                                     </Block>
-                                    {/* <Block middle>
-                                        <Text
-                                            size={16}
-                                            color="#525F7F"
-                                            style={{ textAlign: "center", fontFamily: "open-sans-regular" }}
-                                        >
-                                            An artist of considerable range, Jessica name taken by Melbourne …
-                                        </Text>
-                                        <Button
-                                            color="transparent"
-                                            textStyle={{
-                                                color: "#233DD2",
-                                                fontWeight: "500",
-                                                fontSize: 16,
-                                                fontFamily: "open-sans-regular",
-                                            }}
-                                        >
-                                            Show more
-                                        </Button>
-                                    </Block> */}
 
                                     {/* Lower Bottom */}
-                                    <Block row style={{ paddingVertical: 14 }} space="between">
+                                    <Block row style={{ marginTop: 10 }}>
                                         <Text bold size={16} color="#525F7F" style={{ marginTop: 3 }}>
                                             Community
                                         </Text>
-                                        {/* <Button
-                                            small
-                                            color="transparent"
-                                            textStyle={{ color: "#5E72E4", fontSize: 14 }}
-                                        >
-                                            View all
-                                        </Button> */}
                                     </Block>
-                                    <Block style={{ paddingBottom: -HeaderHeight * 2 }}>
-                                        {/* <Block row space="between" style={{ flexWrap: "wrap" }}>
-                                            {Images.Viewed.map((img, imgIndex) => (
-                                                <Image
-                                                    source={{ uri: img }}
-                                                    key={`viewed-${img}`}
-                                                    resizeMode="cover"
-                                                    style={styles.thumb}
-                                                />
-                                            ))}
-                                        </Block> */}
-                                        <Block>
+
+                                    {this.state.isLoading && <Text h4>Please wait while we get the posts...</Text>}
+                                    {this.state.responseData &&
+                                        !this.state.isLoading &&
+                                        this.state.responseData.map((el, idx) => (
+                                            <Card item={this.state.responseData[idx]} idx={idx} horizontal></Card>
+                                        ))}
+
+                                    {/* <Block>
                                             {articles.map((elem, index) => (
                                                 // <CommunityPost title={elem.title} content={elem.content} key={index} />
                                                 <Card item={elem} key={index} horizontal />
                                             ))}
-                                        </Block>
-                                    </Block>
+                                        </Block> */}
                                 </Block>
                             </Block>
                             <Block style={{ marginBottom: 80 }} />

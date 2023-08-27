@@ -59,6 +59,7 @@ function NotificationsStack(props) {
                     // You can return any component that you like here!
                     return <Icon name={iconName} family="entypo" size={22} color={color} style={{ marginTop: 10 }} />;
                 },
+                headerShown: false,
             })}
             tabBarOptions={{
                 activeTintColor: argonTheme.COLORS.PRIMARY,
@@ -152,8 +153,6 @@ function SettingsStack(props) {
                         <Header back title="Requests" scene={scene} navigation={navigation} />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
-
-                    headerShown: false,
                 }}
             />
             <Stack.Screen
@@ -393,10 +392,10 @@ function HomeStack(props) {
                 name="Notifications"
                 component={NotificationsStack}
                 options={{
-                    header: ({ navigation, scene }) => (
-                        <Header title="Notifications" back navigation={navigation} scene={scene} />
-                    ),
-                    cardStyle: { backgroundColor: "#F8F9FE" },
+                    header: ({ navigation, scene }) => <Header title="" back navigation={navigation} scene={scene} />,
+                    cardStyle: { backgroundColor: "#FFFFFF" },
+
+                    // headerTransparent: true,
                 }}
             />
         </Stack.Navigator>
