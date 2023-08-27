@@ -16,7 +16,9 @@ class Card extends React.Component {
       styles.imageContainer,
       horizontal ? styles.horizontalStyles : styles.verticalStyles,
       styles.shadow,
-    ];
+    ]
+        // console.log(item)
+        ;
     const itemImageName = item.image;
 
     return (
