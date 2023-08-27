@@ -111,6 +111,25 @@ class Register extends React.Component {
                           >
                             <Input
                               borderless
+                              placeholder="Address"
+                              iconContent={
+                                <Icon
+                                  size={16}
+                                  color="#ADB5BD"
+                                  name="map-marker"
+                                  family="ArgonExtra"
+                                  style={styles.inputIcons}
+                                />
+                              }
+                            />
+                          </Block>
+                          
+                          <Block
+                            width={width * 0.8}
+                            style={{ marginBottom: 5 }}
+                          >
+                            <Input
+                              borderless
                               placeholder="Email"
                               iconContent={
                                 <Icon
@@ -138,23 +157,7 @@ class Register extends React.Component {
                                 />
                               }
                             />
-                            <Block row style={styles.passwordCheck}>
-                              <Text
-                                style={{ fontFamily: "open-sans-regular" }}
-                                size={12}
-                                color={argonTheme.COLORS.MUTED}
-                              >
-                                password strength:
-                              </Text>
-                              <Text
-                                style={{ fontFamily: "open-sans-bold" }}
-                                size={12}
-                                color={argonTheme.COLORS.SUCCESS}
-                              >
-                                {" "}
-                                strong
-                              </Text>
-                            </Block>
+                            
                           </Block>
                           <Block row width={width * 0.75}>
                           <Button

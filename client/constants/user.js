@@ -7,7 +7,7 @@ export default [
       username: 'yixuan0922',
       firstName: 'Yixuan',
       lastName: 'Chan',
-      district: 'Yishun',
+      district: 'Woodlands',
       heartsReceived: 0,
       heartsGiven: 0,
     },

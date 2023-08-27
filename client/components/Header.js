@@ -15,15 +15,15 @@ const iPhoneX = () => Platform.OS === "ios" && (height === 812 || width === 812 
 // route to create new post
 const BellButton = ({ isWhite, style, navigation }) => (
     <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate("Notifications")}>
-        <Icon family="Ionicons" size={26} name="add-circle" color={argonTheme.COLORS[isWhite ? "WHITE" : "ICON"]} />
+        <Icon family="Ionicons" size={20} name="add-circle" color={argonTheme.COLORS[isWhite ? "WHITE" : "ICON"]} />
         {/* <Block middle style={styles.notify} /> */}
     </TouchableOpacity>
 );
 
-// route to create new post
+// route to create new postx
 const BasketButton = ({ isWhite, style, navigation }) => (
-    <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate("Cart")}>
-        <Icon family="ArgonExtra" size={16} name="basket" color={argonTheme.COLORS[isWhite ? "WHITE" : "ICON"]} />
+    <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate("Give Hearts")}>
+        <Icon family="AntDesign" size={19} name="heart" color={argonTheme.COLORS[isWhite ? "WHITE" : "ICON"]} />
     </TouchableOpacity>
 );
 
@@ -54,14 +54,14 @@ class Header extends React.Component {
             case "Deals":
             case "Categories":
             case "Category":
-            case "Profile":
+            case "My Profile":
             case "Product":
-            // case "Search":
+            case "Search":
             case "Settings":
             case "LeaderBoard":
                 return [
                     <BellButton key="chat-categories" navigation={navigation} isWhite={white} />,
-                    // <BasketButton key='basket-categories' navigation={navigation} isWhite={white}/>
+                    <BasketButton key='basket-categories' navigation={navigation} isWhite={white}/>
                 ];
             default:
                 break;
@@ -157,13 +157,13 @@ class Header extends React.Component {
                             name={back ? "chevron-left" : "menu"}
                             family="entypo"
                             // name={back ? 'nav-left' : "menu-8"} family="ArgonExtra"
-                            size={back ? 40 : 30}
+                            size={back ? 30 : 30}
                             onPress={this.handleLeftPress}
                             color={iconColor || (white ? argonTheme.COLORS.WHITE : argonTheme.COLORS.ICON)}
                             style={{ marginTop: 2 }}
                         />
                     }
-                    leftStyle={{ flex: 0.2 }}
+                    leftStyle={{ paddingVertical: 12, flex: 0.2 }}
                     titleStyle={[
                         styles.title,
                         { color: argonTheme.COLORS[white ? "WHITE" : "HEADER"], marginLeft: 20 },

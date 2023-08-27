@@ -4,105 +4,69 @@ import { Block, theme, Text } from "galio-framework";
 import Icon from "../components/Icon";
 
 import { Card } from "../components";
-
+import articles from "../constants/articles";
 import user from "../constants/user";
 const { width } = Dimensions.get("screen");
 import argonTheme from "../constants/Theme";
 
-import articles from "../constants/articles";
-
 class Home extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            responseData: null,
-            isLoading: true,
-        };
-    }
-
-    fetchArticles() {
-        const url = "https://us-central1-commenity-edc7c.cloudfunctions.net/app/";
-        const headers = {
-            "Content-Type": "application/json",
-        };
-
-        fetch("https://us-central1-commenity-edc7c.cloudfunctions.net/app/?district=Yishun")
-            .then((data) => data.json())
-            .then((data) => {
-                this.setState({
-                    responseData: data,
-                    isLoading: false,
-                });
-            })
-            .catch((error) => {
-                this.setState({
-                    responseData: null,
-                    isLoading: true,
-                });
-                console.error("Error:", error);
-            });
-    }
-
-    componentDidMount() {
-        this.fetchArticles();
-        this.focusListener = this.props.navigation.addListener("focus", () => {
-            this.fetchArticles();
-        });
-    }
-
-    componentWillUnmount() {
-        // Clean up the listener when the component is unmounted
-        this.focusListener && this.focusListener();
-    }
-
-    renderArticles = () => {
+    
+    renderArticles = () => {const articleComponents = articles.map((article, index) => (
+        <Card key={index} item={article} horizontal    />
+    ));
         return (
-            <Block center>
+            <>
                 {/* // Articles rendered (Paste json file here) */}
 
-                <ScrollView
-                    style={{ marginBottom: 100 }}
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={styles.articles}
-                >
+                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.articles}>
                     <Block flex>
-                        {this.state.isLoading && <Text h4>Please wait while we get the posts...</Text>}
-                        {this.state.responseData &&
-                            !this.state.isLoading &&
-                            this.state.responseData.map((el, idx) => (
-                                <Card item={this.state.responseData[idx]} idx={idx} horizontal></Card>
-                            ))}
+                        {articleComponents}
+                        {/* <Card item={articles[3]} horizontal /> */}
+                        {/* <Block flex row>
+            <Card
+              item={articles[1]}
+              style={{ marginRight: theme.SIZES.BASE }}
+            />
+            <Card item={articles[2]} />
+          </Block> */}
+                        {/* <Card item={articles[3]} horizontal /> */}
+                        {/* <Card item={articles[4]} full /> */}
                     </Block>
                 </ScrollView>
-            </Block>
+            </>
         );
     };
 
     renderCommunity = () => {
         return (
             <Block
+                flex
                 row
-                middle
                 style={{
-                    marginTop: 20,
-                    marginBottom: 20,
+                    // alignItems: "center",
+                    // justifyContent: "center",
+                    // borderWidth: 5,
+                    marginTop: 0,
+                    marginBottom: 0,
+                    minHeight: 50,
                 }}
             >
-                {/* <Block flex={0.9} row center> */}
-                <Icon family="Foundation" size={26} name="marker" color={argonTheme.COLORS.ICON} />
-                <Text h6 bold style={{ marginLeft: 25 }}>
-                    {user[0].district}
-                </Text>
-                {/* </Block> */}
+                <Block flex={0.9} row center>
+                    <Icon family="Foundation" size={16} name="marker" color={argonTheme.COLORS.ICON} />
+                    <Text h6 bold style={{ marginLeft: 25 }}>
+                        {user[0].district}
+                    </Text>
+                </Block>
             </Block>
         );
     };
 
     render() {
         return (
-            <Block style={styles.home}>
+            <Block flex center style={styles.home}>
                 {this.renderCommunity()}
                 {this.renderArticles()}
+                
             </Block>
         );
     }
@@ -114,7 +78,7 @@ const styles = StyleSheet.create({
     },
     articles: {
         width: width - theme.SIZES.BASE * 2,
-        paddingBottom: theme.SIZES.BASE * 4,
+        // paddingBottom: theme.SIZES.BASE * 4,
         paddingHorizontal: 2,
     },
 });
