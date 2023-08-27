@@ -38,6 +38,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LeaderBoard from "../screens/LeaderBoard";
 import LeaderBoardProfile from "../screens/LeaderBoard";
 import Login from "../screens/Login";
+import MyProfile from "../screens/MyProfile";
 
 const { width } = Dimensions.get("screen");
 
@@ -236,7 +237,7 @@ function LeaderBoardStack(props) {
 function ProfileStack(props) {
     return (
         <Stack.Navigator
-            initialRouteName="Profile"
+            initialRouteName="My Profile"
             screenOptions={{
                 mode: "card",
                 headerShown: "screen",
@@ -248,6 +249,17 @@ function ProfileStack(props) {
                 options={{
                     header: ({ navigation, scene }) => (
                         <Header transparent white title="Profile" navigation={navigation} scene={scene} />
+                    ),
+                    cardStyle: { backgroundColor: "#FFFFFF" },
+                    headerTransparent: true,
+                }}
+            />
+            <Stack.Screen
+                name="My Profile"
+                component={MyProfile}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header transparent white title="My Profile" navigation={navigation} scene={scene} />
                     ),
                     cardStyle: { backgroundColor: "#FFFFFF" },
                     headerTransparent: true,
@@ -378,12 +390,12 @@ function HomeStack(props) {
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
             />
-            <Stack.Screen
+    <Stack.Screen
                 name="Cart"
                 component={Cart}
                 options={{
                     header: ({ navigation, scene }) => (
-                        <Header title="Shopping Cart" back navigation={navigation} scene={scene} />
+                        <Header back title="Give Hearts" scene={scene} navigation={navigation} />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}

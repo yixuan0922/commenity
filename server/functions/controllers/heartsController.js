@@ -63,15 +63,15 @@ const updateHearts = async (req, res) => {
 
     const response = await db.collection("users")
         .doc(`${userId}`).update(updatedUserData);
-    const postRef = await db.collection("posts")
-        .where("title", "==", title)
-        .where("district", "==", district)
-        .where("user", "==", user)
-        .where("message", "==", message);
+    // const postRef = await db.collection("posts")
+    //     .where("title", "==", title)
+    //     .where("district", "==", district)
+    //     .where("user", "==", user)
+    //     .where("message", "==", message);
 
-    const postList = [];
-    postRef.forEach((el) => postList.push(el.data));
-    const postResponse = await postList[0].update(updatedPostData);
+    // const postList = [];
+    // postRef.forEach((el) => postList.push(el.data));
+    // const postResponse = await postList[0].update(updatedPostData);
 
 
     return res.status(200).json({message: `userId = ${userId}`});
