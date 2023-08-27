@@ -8,15 +8,16 @@ import {
     Image,
     Animated,
     Platform,
+    Modal,
+    View,
 } from "react-native";
 
 import { Block, Text, Button, theme } from "galio-framework";
 import { Icon } from "../components";
 import argonTheme from "../constants/Theme";
-import Images from "../constants/Images";
+import {Images} from "../constants";
 import { iPhoneX, HeaderHeight } from "../constants/utils";
 
-import articles from "../constants/articles"
 
 const { height, width } = Dimensions.get("window");
 
@@ -31,12 +32,11 @@ export default class CommunityPost extends React.Component {
         const { navigation, route } = this.props;
         // const { params } = navigation && navigation.state;
         // const product = params.product;
-        console.log(route.params);
+        
         const product = route.params?.product;
-        console.log(product);
-        // const productImages = [product.image, product.image, product.image, product.image];
-        const productImages = [];
-        articles.forEach(el=>productImages.push(el.image));
+        // const productName = product.image;
+        
+        const productImages = [ product.image, product.image, product.image];
 
         return (
             <ScrollView
@@ -56,12 +56,61 @@ export default class CommunityPost extends React.Component {
                     >
                         <Image
                             resizeMode="cover"
-                            source={{ uri: image }}
+                            source={Images[image] }
                             style={{ width, height: iPhoneX ? width + 32 : width }}
                         />
                     </TouchableWithoutFeedback>
                 ))}
             </ScrollView>
+        );
+    };
+
+    renderProgress = () => {
+        const { navigation, route } = this.props;
+        // const { params } = navigation && navigation.state;
+        // const product = params.product;
+        const product = route.params?.product;
+        const productImages = [product.image, product.image, product.image, product.image];
+
+        const position = Animated.divide(this.scrollX, width);
+
+        return (
+            <Block row>
+                {productImages.map((_, i) => {
+                    const opacity = position.interpolate({
+                        inputRange: [i - 1, i, i + 1],
+                        outputRange: [0.5, 1, 0.5],
+                        extrapolate: "clamp",
+                    });
+
+                    const width = position.interpolate({
+                        inputRange: [i - 1, i, i + 1],
+                        outputRange: [8, 18, 8],
+                        extrapolate: "clamp",
+                    });
+
+                    return <Animated.View key={i} style={[styles.dots, { opacity, width }]} />;
+                })}
+            </Block>
+        );
+    };
+
+    renderSize = (label) => {
+        const active = this.state.selectedSize === label;
+
+        return (
+            <TouchableHighlight
+                style={styles.sizeButton}
+                underlayColor={argonTheme.COLORS.PRICE_COLOR}
+                onPress={() => this.setState({ selectedSize: label })}
+            >
+                <Text
+                    style={{ fontFamily: "open-sans-regular" }}
+                    color={active ? theme.COLORS.PRIMARY : argonTheme.COLORS.TEXT}
+                >
+                    {label}
+                </Text>
+            </TouchableHighlight>
         );
     };
 
@@ -82,20 +131,34 @@ export default class CommunityPost extends React.Component {
         );
     };
 
+    // Add a state variable to control the visibility of the popup
+  state = {
+    selectedSize: null,
+    isPopupVisible: false, // Initialize as false
+  };
+
+  // Function to toggle the visibility of the popup
+  togglePopup = () => {
+    this.setState((prevState) => ({
+      isPopupVisible: !prevState.isPopupVisible,
+    }));
+  };
+
     render() {
-        const { selectedSize } = this.state;
+        // const { selectedSize } = this.state;
+        const { selectedSize, isPopupVisible } = this.state; // Destructure isPopupVisible
         const { navigation, route } = this.props;
         // const { params } = navigation && navigation.state;
         // const product = params.product;
-        const product = route.params?.post;
+        const product = route.params?.product;
 
         return (
             <Block flex style={styles.communitypost}>
                 <Block flex style={{ position: "relative" }}>
                     {this.renderGallery()}
-                    {/* <Block center style={styles.dotsContainer}>
+                    <Block center style={styles.dotsContainer}>
                         {this.renderProgress()}
-                    </Block> */}
+                    </Block>
                 </Block>
                 <Block flex style={styles.options}>
                     {this.renderChatButton()}
@@ -130,10 +193,10 @@ export default class CommunityPost extends React.Component {
                                     shadowless
                                     style={styles.GoButton}
                                     color={argonTheme.COLORS.PRIMARY}
-                                    // onPress={() => navigation.navigate("Cart")}
+                                    onPress={this.togglePopup} // Call the togglePopup function
                                 >
                                     <Text style={{ fontFamily: "open-sans-bold" }} color={argonTheme.COLORS.WHITE}>
-                                        GO
+                                        Accept
                                     </Text>
                                 </Button>
                             </Block>
@@ -148,10 +211,20 @@ export default class CommunityPost extends React.Component {
                                 paddingBottom: theme.SIZES.BASE * 3,
                             }}
                         >
-                            <Text>{product.message}</Text>
+                            <Text>{product.content}</Text>
                         </Block>
                     </ScrollView>
                 </Block>
+                    <Modal transparent={true} visible={isPopupVisible} animationType="slide">
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>We have sent your request confirmation! Please chat for more information.</Text>
+                            <Button onPress={this.togglePopup} color={argonTheme.COLORS.PRIMARY}>
+                            Return
+                            </Button>
+                        </View>
+                    </View>
+                    </Modal>
             </Block>
         );
     }
@@ -261,4 +334,30 @@ const styles = StyleSheet.create({
         borderLeftWidth: 0.5,
         borderBottomWidth: 0,
     },
+
+      centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+      },
+      modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+      },
+      modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+      },
 });
