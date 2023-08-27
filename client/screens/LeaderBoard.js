@@ -8,6 +8,8 @@ import articles from "../constants/articles";
 import { HeaderHeight } from "../constants/utils";
 import { Icon, Card } from "../components";
 import Board from "../components/Board";
+
+//this is the mock score
 import entries from "../constants/entries";
 
 
@@ -35,9 +37,12 @@ const thumbMeasure = (width - 48 - 32) / 3;
 
 class LeaderBoard extends React.Component {
 
+  
 
     render() {
+
         const { navigation } = this.props;
+
 
         return (
             <Block flex style={styles.profile}>
@@ -79,6 +84,7 @@ class LeaderBoard extends React.Component {
                                             </Text>
                                         </Block>
                                     </Block>   
+                           
                                     <Block flex>
                                         <Block middle style={styles.avatarContainer}>
                                             <Image source={Images.redhill} style={styles.avatarFirst} />
@@ -86,7 +92,7 @@ class LeaderBoard extends React.Component {
                                         </Block>
                                         <Block middle style={styles.nameInfo}>
                                             <Text style={{ fontFamily: "open-sans-bold" }} size={15} color="#32325D">
-                                            {entries[0].location}
+                                                {entries[0].location}
                                             </Text>
                                             <Text
                                                 size={14}
@@ -96,10 +102,11 @@ class LeaderBoard extends React.Component {
                                                 {entries[0].score}
                                             </Text>
                                         </Block>
-                                    </Block> 
+                                    </Block>   
+
                                     <Block flex>
                                         <Block middle style={styles.avatarContainer}>
-                                            <Image source={Images.bukitPanjang} style={styles.avatarThird} /> 
+                                            <Image source={Images.redhill} style={styles.avatarThird} />
                                             <Block middle style={styles.scoring}><Text>3</Text></Block>
                                         </Block>
                                         <Block middle style={styles.nameInfo}>
@@ -114,8 +121,9 @@ class LeaderBoard extends React.Component {
                                                 {entries[2].score}
                                             </Text>
                                         </Block>
-                                    </Block>  
+                                    </Block>   
                                 </Block>
+                             
                                 <Block>
                                     {/* Divider */}
                                     <Block middle style={{ marginTop: 30, marginBottom: 16 }}>

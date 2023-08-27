@@ -149,7 +149,7 @@ function SettingsStack(props) {
                 component={NotificationsScreen}
                 options={{
                     header: ({ navigation, scene }) => (
-                        <Header back title="Notifications" scene={scene} navigation={navigation} />
+                        <Header back title="Requests" scene={scene} navigation={navigation} />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
@@ -165,11 +165,11 @@ function SettingsStack(props) {
                 }}
             />
             <Stack.Screen
-                name="Notifications"
+                name="Requests"
                 component={NotificationsStack}
                 options={{
                     header: ({ navigation, scene }) => (
-                        <Header back title="Notifications" scene={scene} navigation={navigation} />
+                        <Header back title="Requests" scene={scene} navigation={navigation} />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
@@ -224,7 +224,7 @@ function LeaderBoardStack(props) {
                 component={NotificationsStack}
                 options={{
                     header: ({ navigation, scene }) => (
-                        <Header back title="Notifications" scene={scene} navigation={navigation} />
+                        <Header back title="Notifications " scene={scene} navigation={navigation} />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}

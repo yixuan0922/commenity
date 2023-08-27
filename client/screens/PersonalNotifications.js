@@ -4,6 +4,8 @@ import { Block, Text, Input, Button } from "galio-framework";
 import { Notification } from "../components";
 import { argonTheme } from "../constants";
 
+import { useRoute } from '@react-navigation/native';
+
 import { Picker } from "@react-native-picker/picker";
 
 const styles = {
@@ -21,7 +23,7 @@ const styles = {
   picker: {
     marginVertical: 30,
     width: 400,
-    padding: 10,
+
   },
 };
 
@@ -36,7 +38,10 @@ export default class PersonalNotifications extends React.Component {
       title: '',
       message: '',
       userName: 'dembouz', //temporary
+      district: "yishun",
+      
     };
+
   }
 
   handleRequestTypeChange = (value) => {
@@ -54,27 +59,47 @@ export default class PersonalNotifications extends React.Component {
     console.log("inside the submit function!");
     const { requestType, name, email, message } = this.state;
     const url = "https://us-central1-commenity-edc7c.cloudfunctions.net/app";
+    const headers =  {
+      'Content-Type': 'application/json',
+    };
+    const postData = {
+      title: this.state.title,
+      message: this.state.message,
+      userName: this.state.userName,
+      requestType: this.state.requestType,
+      district: this.state.district,
+    }; 
+
+
     // Handle form submission here
-    fetch(url + "/", {
+    fetch(url + "/create", {
       method: "POST",
       headers: headers,
       credentials: "include",
-      body: {
-        title: this.state.title,
-        message: this.state.message,
-        userName: this.state.userName,
-        requestType: this.state.requestType
-      } 
+      body: JSON.stringify(postData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Response:', data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
     });
   
   };
 
+  
 
 
   render() {
+
+    const {route} = this.props;
+    console.log(route);
+
+
     return (
       <Block flex center>
-        <Block>
+        <Block flex-col>
           <Text h4>Request Type</Text>
           <Picker
             selectedValue={this.state.requestType}

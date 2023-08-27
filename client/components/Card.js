@@ -6,6 +6,8 @@ import { Block, Text, theme } from "galio-framework";
 
 import { argonTheme } from "../constants";
 
+import articles from "../constants/articles";
+
 class Card extends React.Component {
     render() {
         const { navigation, item, horizontal, full, style, ctaColor, imageStyle, ctaRight } = this.props;
@@ -22,7 +24,7 @@ class Card extends React.Component {
             <Block row={horizontal} card flex style={cardContainer}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { product: item })}>
                     <Block flex style={imgContainer}>
-                        <Image source={{ uri: item.image }} style={imageStyles} />
+                        <Image source={{ uri: articles[Math.floor(Math.random()*articles.length)].image }} style={imageStyles} />
                     </Block>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { product: item })}>
@@ -36,14 +38,14 @@ class Card extends React.Component {
                             >
                                 {item.title}
                             </Text>
-                            {item.body ? (
+                            {item.message ? (
                                 <Block flex left>
                                     <Text
                                         style={{ fontFamily: "open-sans-regular" }}
                                         size={12}
                                         color={argonTheme.COLORS.TEXT}
                                     >
-                                        {item.body}
+                                        {item.message}
                                     </Text>
                                 </Block>
                             ) : (
@@ -58,7 +60,7 @@ class Card extends React.Component {
                                 color={ctaColor || argonTheme.COLORS.ACTIVE}
                                 bold
                             >
-                                {item.cta}
+                                View Post
                             </Text>
                         </Block>
                     </Block>
