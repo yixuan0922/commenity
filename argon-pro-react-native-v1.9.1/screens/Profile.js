@@ -1,12 +1,12 @@
 import React from "react";
-import { StyleSheet, Dimensions, ScrollView, Image, ImageBackground, Platform, TouchableOpacity } from "react-native";
+import { StyleSheet, Dimensions, ScrollView, Image, ImageBackground, Platform, TouchableOpacity,Modal,View} from "react-native";
 import { Block, Text, theme } from "galio-framework";
-
 import { Button } from "../components";
 import { Images, argonTheme } from "../constants";
 import articles from "../constants/articles";
 import { HeaderHeight } from "../constants/utils";
 import { Icon, Card } from "../components";
+
 import user from "../constants/user";
 
 class CommunityPost extends React.Component {
@@ -31,6 +31,22 @@ const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
+class Profile extends React.Component {
+    // Add a state variable to control the visibility of the popup
+  state = {
+    selectedSize: null,
+    isPopupVisible: false, // Initialize as false
+  };
+
+  // Function to toggle the visibility of the popup
+  togglePopup = () => {
+    this.setState((prevState) => ({
+      isPopupVisible: !prevState.isPopupVisible,
+    }));
+  };
+    render() {
+        const { navigation } = this.props;
+        const { selectedSize, isPopupVisible } = this.state;
 export default class Profile extends React.Component {
 
     renderInformation = () => {
@@ -72,10 +88,27 @@ export default class Profile extends React.Component {
                         <Text>hearts received</Text>
                     </Block>
                     <Block middle>
-                        <TouchableOpacity onPress={() => navigation.navigate("HomeDrawer")}>
+                        <TouchableOpacity onPress={this.togglePopup}>
                             <Image source={Images.ProfileGiveHand} />
                         </TouchableOpacity>
                     </Block>
+                                        <Modal transparent={true} visible={isPopupVisible} animationType="slide">
+                                        <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>Are you sure?</Text>
+                            
+                            <Button onPress={this.togglePopup} color={argonTheme.COLORS.PRIMARY}>
+                            <Text style={styles.buttonText}>Yes</Text>
+                            </Button> 
+                            <Button onPress={this.togglePopup} color={argonTheme.COLORS.PRIMARY}>
+                            <Text style={styles.buttonText}>No</Text>
+                            </Button>
+                            
+                            
+                            
+                        </View>
+                    </View>
+                </Modal>
                     <Block middle>
                         <Text h4>{user.heartsGiven}</Text>
                         <Text>hearts given</Text>
@@ -236,5 +269,35 @@ const styles = StyleSheet.create({
         width: thumbMeasure,
         height: thumbMeasure,
     },
-});
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+      },
+      modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+      },
+      centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+      },
+      buttonText: {
+        color: 'black', // Change this color to the desired text color
+        fontSize: 16,   // Adjust the font size as needed
+        fontWeight: 'bold', // You can adjust the font weight (e.g., 'normal', 'bold')
+    },
+    })
 
