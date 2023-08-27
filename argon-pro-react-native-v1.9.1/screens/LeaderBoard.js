@@ -1,9 +1,10 @@
 import React from "react";
 import { StyleSheet, Dimensions, ScrollView, Image, ImageBackground, Platform, TouchableOpacity } from "react-native";
 import { Block, Text, theme } from "galio-framework";
+import Images from "../constants/Images";
 
 import { Button } from "../components";
-import { Images, argonTheme } from "../constants";
+
 import articles from "../constants/articles";
 import { HeaderHeight } from "../constants/utils";
 import { Icon, Card } from "../components";
@@ -39,7 +40,7 @@ class LeaderBoard extends React.Component {
     render() {
         const { navigation } = this.props;
 
-        return (
+        return (<ScrollView showsVerticalScrollIndicator={false} style={{ width,height, marginBottom: "25%",}} >
             <Block flex style={styles.profile}>
                 <Block flex>
                     <ImageBackground
@@ -51,7 +52,7 @@ class LeaderBoard extends React.Component {
                         flex = {0.6}
                         row
                         middle
-                        style={{padding: 0, marginTop: -20}}
+                        style={{padding: 0, marginTop: -50}}
                     >
                         <Text h6 bold middle style={{ color: 'white' }}>
                             August 2023
@@ -60,7 +61,7 @@ class LeaderBoard extends React.Component {
                         
                         {/* <ScrollView showsVerticalScrollIndicator={false} style={{ width, marginTop: "25%" }}> */}
                             <Block flex style={[styles.profileCard]}>
-                                <Block style={{ width: width * 0.85, height: 150 }} row>
+                                <Block style={{ width: width * 0.85, height: 150,marginTop:-30 }} row>
                                     <Block flex>
                                         <Block middle style={styles.avatarContainer}>
                                             <Image source={Images.redhill} style={styles.avatarSecond} />
@@ -136,12 +137,12 @@ class LeaderBoard extends React.Component {
                                             ))}
                                         </Block> */}
                                         <Block>
-                                            <ScrollView showsVerticalScrollIndicator={false}>
+                                            <ScrollView showsVerticalScrollIndicator={false} style={{  marginBottom: "25%" }}> 
                                             {/* {articles.map((elem, index) => (
                                                 // <CommunityPost title={elem.title} content={elem.content} key={index} />
                                                 <Card item={elem} key={index} horizontal />
                                             ))} */}
-                                            <Block flex>
+                                            <Block flex style={[styles.profileCard]}>
                                                 {/* <Board item={entries[0]} />
                                                 <Board item={entries[1]} />
                                                 <Board item={entries[2]} /> */}
@@ -158,6 +159,7 @@ class LeaderBoard extends React.Component {
                     </ImageBackground>
                 </Block>
             </Block>
+            </ScrollView>
         );
     }
 }

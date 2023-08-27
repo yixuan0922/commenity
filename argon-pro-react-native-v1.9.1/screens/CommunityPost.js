@@ -8,13 +8,16 @@ import {
     Image,
     Animated,
     Platform,
+    Modal,
+    View,
 } from "react-native";
 
 import { Block, Text, Button, theme } from "galio-framework";
 import { Icon } from "../components";
 import argonTheme from "../constants/Theme";
-import Images from "../constants/Images";
+import {Images} from "../constants";
 import { iPhoneX, HeaderHeight } from "../constants/utils";
+
 
 const { height, width } = Dimensions.get("window");
 
@@ -29,8 +32,11 @@ export default class CommunityPost extends React.Component {
         const { navigation, route } = this.props;
         // const { params } = navigation && navigation.state;
         // const product = params.product;
+        
         const product = route.params?.product;
-        const productImages = [product.image, product.image, product.image, product.image];
+        // const productName = product.image;
+        
+        const productImages = [ product.image, product.image, product.image];
 
         return (
             <ScrollView
@@ -50,7 +56,7 @@ export default class CommunityPost extends React.Component {
                     >
                         <Image
                             resizeMode="cover"
-                            source={{ uri: image }}
+                            source={Images[image] }
                             style={{ width, height: iPhoneX ? width + 32 : width }}
                         />
                     </TouchableWithoutFeedback>
@@ -125,8 +131,22 @@ export default class CommunityPost extends React.Component {
         );
     };
 
+    // Add a state variable to control the visibility of the popup
+  state = {
+    selectedSize: null,
+    isPopupVisible: false, // Initialize as false
+  };
+
+  // Function to toggle the visibility of the popup
+  togglePopup = () => {
+    this.setState((prevState) => ({
+      isPopupVisible: !prevState.isPopupVisible,
+    }));
+  };
+
     render() {
-        const { selectedSize } = this.state;
+        // const { selectedSize } = this.state;
+        const { selectedSize, isPopupVisible } = this.state; // Destructure isPopupVisible
         const { navigation, route } = this.props;
         // const { params } = navigation && navigation.state;
         // const product = params.product;
@@ -173,10 +193,10 @@ export default class CommunityPost extends React.Component {
                                     shadowless
                                     style={styles.GoButton}
                                     color={argonTheme.COLORS.PRIMARY}
-                                    // onPress={() => navigation.navigate("Cart")}
+                                    onPress={this.togglePopup} // Call the togglePopup function
                                 >
                                     <Text style={{ fontFamily: "open-sans-bold" }} color={argonTheme.COLORS.WHITE}>
-                                        GO
+                                        Accept
                                     </Text>
                                 </Button>
                             </Block>
@@ -195,6 +215,16 @@ export default class CommunityPost extends React.Component {
                         </Block>
                     </ScrollView>
                 </Block>
+                    <Modal transparent={true} visible={isPopupVisible} animationType="slide">
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>We have sent your request confirmation! Please chat for more information.</Text>
+                            <Button onPress={this.togglePopup} color={argonTheme.COLORS.PRIMARY}>
+                            Return
+                            </Button>
+                        </View>
+                    </View>
+                    </Modal>
             </Block>
         );
     }
@@ -304,4 +334,30 @@ const styles = StyleSheet.create({
         borderLeftWidth: 0.5,
         borderBottomWidth: 0,
     },
+
+      centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+      },
+      modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+      },
+      modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+      },
 });
