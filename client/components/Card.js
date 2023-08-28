@@ -158,11 +158,13 @@ const styles = StyleSheet.create({
         height: 215,
     },
     shadow: {
-        shadowColor: "#8898AA",
-        shadowOffset: { width: 0, height: 1 },
-        shadowRadius: 6,
-        shadowOpacity: 0.1,
-        elevation: 2,
+        shadowColor: "#32373d",
+        // For IOS
+        shadowOffset: { width: -2, height: 4 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        // For android
+        elevation: 4,
     },
 });
 
