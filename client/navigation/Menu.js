@@ -25,7 +25,7 @@ function CustomDrawerContent({
   const insets = useSafeArea();
   const screens = [
     { title: "Home", navigateTo: "HomeDrawer" },
-    { title: "Profile", navigateTo: "ProfileDrawer" },
+    { title: "My Profile", navigateTo: "ProfileDrawer" },
     { title: "LeaderBoard", navigateTo: "LeaderBoard" },
     // { title: "Elements", navigateTo: "ElementsDrawer" },
     // { title: "Articles", navigateTo: "ArticlesDrawer" },
