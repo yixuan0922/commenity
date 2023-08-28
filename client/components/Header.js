@@ -54,7 +54,7 @@ class Header extends React.Component {
             case "Deals":
             case "Categories":
             case "Category":
-            case "My Profile":
+            case "MyProfile":
             case "Product":
             case "Search":
             case "Settings":

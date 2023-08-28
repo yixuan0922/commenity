@@ -195,10 +195,10 @@ class Profile extends React.Component {
                                             ))}
                                         </Block> */}
                                         <Block>
-                                            {articles.map((elem, index) => (
+                                            {/* {articles.map((elem, index) => (
                                                 // <CommunityPost title={elem.title} content={elem.content} key={index} />
                                                 <Card item={elem} key={index} horizontal />
-                                            ))}
+                                            ))} */}
                                         </Block>
                                     </Block>
                                 </Block>
