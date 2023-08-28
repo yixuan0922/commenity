@@ -24,15 +24,17 @@ class Card extends React.Component {
             <Block row={horizontal} card flex style={cardContainer}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { post: item })}>
                     <Block flex style={imgContainer}>
-                        <Image source={{ uri: articles[idx%(articles.length)].image }} style={imageStyles} />
+                        <Image source={{ uri: articles[idx % articles.length].image }} style={imageStyles} />
                     </Block>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { post: item })}>
                     <Block flex space="between" style={styles.cardDescription}>
                         <Block flex>
                             <Text
-                                style={[styles.cardTitle, { fontFamily: "open-sans-regular" }]}
-                                size={14}
+                                style={[styles.cardTitle, { fontFamily: "open-sans-bold" }]}
+                                size={17}
+                                ellipsizeMode="tail"
+                                numberOfLines={1}
                                 // style={styles.cardTitle}
                                 color={argonTheme.COLORS.TEXT}
                             >
@@ -41,7 +43,11 @@ class Card extends React.Component {
                             {item.message ? (
                                 <Block flex left>
                                     <Text
-                                        style={{ fontFamily: "open-sans-regular" }}
+                                        style={{
+                                            fontFamily: "open-sans-regular",
+                                        }}
+                                        ellipsizeMode="tail"
+                                        numberOfLines={4}
                                         size={12}
                                         color={argonTheme.COLORS.TEXT}
                                     >
@@ -52,29 +58,47 @@ class Card extends React.Component {
                                 <Block />
                             )}
                         </Block>
-                        <Block >
+                        <Block flex row style={{ alignItems: "flex-end", justifyContent: "space-between" }}>
+                            {item.requestType.toLowerCase() === "help" ? (
+                                <Text
+                                    size={10}
+                                    muted={!ctaColor}
+                                    color={ctaColor || argonTheme.COLORS.ACTIVE}
+                                    bold
+                                    style={{
+                                        color: "red",
+                                        padding: 5,
+                                        borderRadius: 10,
+                                        backgroundColor: "#ffd4d8",
+                                    }}
+                                >
+                                    Help Request
+                                </Text>
+                            ) : (
+                                <Text
+                                    size={10}
+                                    muted={!ctaColor}
+                                    color={ctaColor || argonTheme.COLORS.ACTIVE}
+                                    bold
+                                    style={{
+                                        color: "green",
+                                        padding: 5,
+                                        borderRadius: 10,
+                                        backgroundColor: "#c4ffb3",
+                                    }}
+                                >
+                                    Give Request
+                                </Text>
+                            )}
+
                             <Text
                                 style={{ fontFamily: "open-sans-bold" }}
-                                size={12}
+                                size={15}
                                 muted={!ctaColor}
                                 color={ctaColor || argonTheme.COLORS.ACTIVE}
                                 bold
                             >
-                                {item.requestType.toLowerCase() === "help" ? 
-                                <Text style = {{"fontSize":"10", color: "red"}}>Help Request</Text>
-                                : 
-                                <Text style = {{"fontSize":"10", color: "green"}}>Give Request</Text>}
-                            </Text>
-                        </Block>
-                        <Block right={ctaRight ? true : false}>
-                            <Text
-                                style={{ fontFamily: "open-sans-bold" }}
-                                size={12}
-                                muted={!ctaColor}
-                                color={ctaColor || argonTheme.COLORS.ACTIVE}
-                                bold
-                            >
-                                <Text h6>View Post</Text>
+                                View Post
                             </Text>
                         </Block>
                     </Block>
@@ -118,7 +142,8 @@ const styles = StyleSheet.create({
         // borderRadius: 3,
     },
     horizontalImage: {
-        height: 122,
+        resizeMode: "cover",
+        height: 190,
         width: "auto",
     },
     horizontalStyles: {
