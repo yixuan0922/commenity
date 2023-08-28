@@ -32,17 +32,6 @@ const updateHearts = async (req, res) => {
         .get()
         .then((entry)=>entry.data());
 
-    // const postList = [];
-
-    // if (postQuerySnapshot.empty) {
-    //   return res.json({
-    //     error:
-    //         "No posts found!",
-    //   });
-    // }
-    // postQuerySnapshot.forEach((el)=>postList.push(el.data()));
-    // const postData = postList[0];
-
     const updatedUserData = {
       id: userData.id,
       district: userData.district,
@@ -63,20 +52,59 @@ const updateHearts = async (req, res) => {
 
     const response = await db.collection("users")
         .doc(`${userId}`).update(updatedUserData);
-    // const postRef = await db.collection("posts")
-    //     .where("title", "==", title)
-    //     .where("district", "==", district)
-    //     .where("user", "==", user)
-    //     .where("message", "==", message);
-
-    // const postList = [];
-    // postRef.forEach((el) => postList.push(el.data));
-    // const postResponse = await postList[0].update(updatedPostData);
-
 
     return res.status(200).json({message: `userId = ${userId}`});
   } catch (error) {
     return res.status(500).json({error: error.message});
+  }
+};
+
+// perform Yi Xuan's transaction here:
+const patchHeartsTransaction = async (req, res) => {
+  // const {userId} = req.query;
+  // for now, I would need to mock this as
+  // just YiXuan's user until I figure out the routes
+  const {userId} = req.query ? req.query : "meta_pres";
+
+  const {targetUserId} = req.body;
+
+  try {
+    const userRef = db.collection("users").doc(userId);
+    const targetRef = db.collection("users").doc(targetUserId);
+
+
+    const userDoc = await userRef.get()
+        .catch((error)=>res.json({error: "No user found!"}));
+    const targetDoc = await targetRef.get()
+        .catch((error)=>res.json({error: "Target user not found!"}));
+
+    const userData = userDoc.data();
+    const targetData = targetDoc.data();
+
+    const userCurrHeartsReceived = userData.heartsReceived;
+    const userCurrHeartsGiven = userData.heartsGiven;
+    const targetCurrHeartsReceived = targetData.heartsReceived;
+
+    if (userCurrHeartsReceived < 1) {
+      return res.status(400)
+          .json({error: "You do not have enough hearts to give!"});
+    }
+
+    // he is my mock giver
+    const userResponse = await db.collection("users")
+        .doc(userId)
+        .update({heartsGiven: userCurrHeartsGiven + 1,
+          heartsReceived: userCurrHeartsReceived - 1});
+
+    const targetResponse = await db.collection("users")
+        .doc(targetUserId)
+        .update({
+          heartsReceived: targetCurrHeartsReceived + 1,
+        });
+
+    return res.status(200).json({message: "All users updated successfully!"});
+  } catch (error) {
+    return res.status(400).json({error: error.message});
   }
 };
 
@@ -88,4 +116,5 @@ const getDembouz = async (req, res) => {
 module.exports = {
   updateHearts,
   getDembouz,
+  patchHeartsTransaction,
 };
