@@ -24,7 +24,8 @@ class Card extends React.Component {
             <Block row={horizontal} card flex style={cardContainer}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { post: item })}>
                     <Block flex style={imgContainer}>
-                        <Image source={{ uri: articles[idx % articles.length].image }} style={imageStyles} />
+                        {/* <Image source={{ uri: articles[idx % articles.length].image }} style={imageStyles} /> */}
+                        <Image source={{ uri: item.image }} style={imageStyles} />
                     </Block>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("CommunityPost", { post: item })}>
@@ -160,7 +161,7 @@ const styles = StyleSheet.create({
     shadow: {
         shadowColor: "#32373d",
         // For IOS
-        shadowOffset: { width: -2, height: 4 },
+        shadowOffset: { width: -2, height: 2 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
         // For android

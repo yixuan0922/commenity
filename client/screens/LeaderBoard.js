@@ -37,6 +37,7 @@ class LeaderBoard extends React.Component {
                         this.aggregateHeartsData();
                     }
                 );
+                console.log("In leaderboard fetch!");
             })
             .catch(error => {
                 this.setState({

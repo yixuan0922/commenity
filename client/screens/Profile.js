@@ -7,7 +7,10 @@ import articles from "../constants/articles";
 import { HeaderHeight } from "../constants/utils";
 import { Icon, Card } from "../components";
 
-import user from "../constants/user";
+//user state:
+import {useAtom} from "jotai";
+
+// import user from "../constants/user";
 
 class CommunityPost extends React.Component {
     render() {
@@ -36,19 +39,71 @@ export default class Profile extends React.Component {
   state = {
     selectedSize: null,
     isPopupVisible: false, // Initialize as false
+    users: null
   };
 
   // Function to toggle the visibility of the popup
-  togglePopup = () => {
-    this.setState((prevState) => ({
-      isPopupVisible: !prevState.isPopupVisible,
-    }));
-  };
+    togglePopup = () => {
+        this.setState((prevState) => ({
+        isPopupVisible: !prevState.isPopupVisible,
+            }));
+    };
+
+    componentDidMount(){
+        this.getAllUsers();
+    }
+
+    getAllUsers(){
+        const url = "https://us-central1-commenity-edc7c.cloudfunctions.net/app/user/";
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    users: data
+                });
+                console.log("HERE!")
+            })
+            .catch(error => {
+                console.error('Error:', "Failed to get users");
+            });
+    }
+    
+    giveHeartsTransaction(){
+        const { navigation, route } = this.props;
+        const targetUserId = route.params?.user.id;
+        //just a placeholder until auth
+        const urlQuery = "meta_pres";
+        const headers =  {
+            'Content-Type': 'application/json',
+        };
+        const url = "https://us-central1-commenity-edc7c.cloudfunctions.net/app/giveHearts/";
+
+        fetch(`${url}?userId=${urlQuery}`, {
+            method: "PATCH",
+            headers: headers,
+            body: JSON.stringify({
+                targetUserId: targetUserId  //note to self: remember to JSON.stringify next time...
+            })
+            })
+            .then(response => response.json())
+            .then(data => console.log("data:",data))
+            .then(()=>{this.getAllUsers()})
+            .catch(error => console.log("error:", error));
+        // .then(data => data.json())
+
+    }
 
     renderInformation = () => {
         const { navigation, route } = this.props;
-        const user = route.params?.user;
+        let user = route.params?.user;
         const { selectedSize, isPopupVisible } = this.state;
+        // const user = this.state.users.filter(el=>el.id==userId)[0];
+        const userArr = this.state.users;
+        
+        if(userArr){
+            user = userArr.filter( el => {return el.id == user.id})[0]
+        }
+        
 
 
         return (
@@ -94,14 +149,15 @@ export default class Profile extends React.Component {
                         <View style={styles.modalView}>
                             <Text style={styles.modalText}>Are you sure?</Text>
                             
-                            <Button onPress={this.togglePopup} color={argonTheme.COLORS.PRIMARY}>
+                            <Button onPress={()=>{
+                                this.togglePopup();
+                                this.giveHeartsTransaction();
+                                }} color={argonTheme.COLORS.PRIMARY}>
                             <Text style={styles.buttonText}>Yes</Text>
                             </Button> 
                             <Button onPress={this.togglePopup} color={argonTheme.COLORS.PRIMARY}>
                             <Text style={styles.buttonText}>No</Text>
                             </Button>
-                            
-                            
                             
                         </View>
                     </View>
@@ -116,57 +172,17 @@ export default class Profile extends React.Component {
                 <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
                     <Block style={styles.divider} />
                 </Block>
-                {/* <Block middle>
-                    <Text
-                        size={16}
-                        color="#525F7F"
-                        style={{ textAlign: "center", fontFamily: "open-sans-regular" }}
-                    >
-                        An artist of considerable range, Jessica name taken by Melbourne …
-                    </Text>
-                    <Button
-                        color="transparent"
-                        textStyle={{
-                            color: "#233DD2",
-                            fontWeight: "500",
-                            fontSize: 16,
-                            fontFamily: "open-sans-regular",
-                        }}
-                    >
-                        Show more
-                    </Button>
-                </Block> */}
+
 
                 {/* Lower Bottom */}
                 <Block row style={{ paddingVertical: 14 }} space="between">
                     <Text bold size={16} color="#525F7F" style={{ marginTop: 3 }}>
                         Community
                     </Text>
-                    {/* <Button
-                        small
-                        color="transparent"
-                        textStyle={{ color: "#5E72E4", fontSize: 14 }}
-                    >
-                        View all
-                    </Button> */}
+        
                 </Block>
                 <Block style={{ paddingBottom: -HeaderHeight * 2 }}>
-                    {/* <Block row space="between" style={{ flexWrap: "wrap" }}>
-                        {Images.Viewed.map((img, imgIndex) => (
-                            <Image
-                                source={{ uri: img }}
-                                key={`viewed-${img}`}
-                                resizeMode="cover"
-                                style={styles.thumb}
-                            />
-                        ))}
-                    </Block> */}
-                    {/* <Block>
-                        {articles.map((elem, index) => (
-                            // <CommunityPost title={elem.title} content={elem.content} key={index} />
-                            <Card item={elem} key={index} horizontal />
-                        ))}
-                    </Block> */}
+
                 </Block>
             </Block>
         </Block>
@@ -174,6 +190,7 @@ export default class Profile extends React.Component {
         </>
         )
     }
+
 
     render() {
 

@@ -20,6 +20,7 @@ class Home extends React.Component {
         };
     }
 
+    // until login is done, set district to Yishun first
     fetchArticles() {
         const url = "https://us-central1-commenity-edc7c.cloudfunctions.net/app/";
         const headers = {
