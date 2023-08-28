@@ -1,12 +1,13 @@
 import React from "react";
-import { StyleSheet, Dimensions, ScrollView, Image, ImageBackground, Platform, TouchableOpacity } from "react-native";
+import { StyleSheet, Dimensions, ScrollView, Image, ImageBackground, Platform, TouchableOpacity,Modal,View} from "react-native";
 import { Block, Text, theme } from "galio-framework";
-
 import { Button } from "../components";
 import { Images, argonTheme } from "../constants";
 import articles from "../constants/articles";
 import { HeaderHeight } from "../constants/utils";
 import { Icon, Card } from "../components";
+
+import user from "../constants/user";
 
 class CommunityPost extends React.Component {
     render() {
@@ -30,9 +31,154 @@ const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
-class Profile extends React.Component {
+export default class Profile extends React.Component {
+    // Add a state variable to control the visibility of the popup
+  state = {
+    selectedSize: null,
+    isPopupVisible: false, // Initialize as false
+  };
+
+  // Function to toggle the visibility of the popup
+  togglePopup = () => {
+    this.setState((prevState) => ({
+      isPopupVisible: !prevState.isPopupVisible,
+    }));
+  };
+
+    renderInformation = () => {
+        const { navigation, route } = this.props;
+        const user = route.params?.user;
+        const { selectedSize, isPopupVisible } = this.state;
+
+
+        return (
+            <>            
+            <Block flex style={styles.profileCard}>
+            <Block middle style={styles.avatarContainer}>
+                <Image source={Images.ProfilePicture2} style={styles.avatar} />
+            </Block>
+            <Block flex>
+                <Block middle style={styles.nameInfo}>
+                    <Text style={{ fontFamily: "open-sans-regular" }} size={28} color="#32325D">
+                        {user.firstName} {user.lastName}
+                    </Text>
+                    <Text
+                        size={14}
+                        color="#32325D"
+                        style={{ marginTop: 10, fontFamily: "open-sans-light" }}
+                    >
+                        @{user.id}
+                    </Text>
+                    <Text
+                        size={16}
+                        color="#32325D"
+                        style={{ marginTop: 10, fontFamily: "open-sans-light" }}
+                    >
+                        <Icon name="location-on" family="MaterialIcons" size={14} color={"black"} />
+                        &nbsp; {user.district}
+                    </Text>
+                </Block>
+
+                <Block flex space="evenly" row style={{ marginTop: 40 }}>
+                    <Block middle>
+                        <Text h4>{user.heartsReceived}</Text>
+                        <Text>hearts received</Text>
+                    </Block>
+                    <Block middle>
+                        <TouchableOpacity onPress={this.togglePopup}>
+                            <Image source={Images.ProfileGiveHand} />
+                        </TouchableOpacity>
+                    </Block>
+                                        <Modal transparent={true} visible={isPopupVisible} animationType="slide">
+                                        <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>Are you sure?</Text>
+                            
+                            <Button onPress={this.togglePopup} color={argonTheme.COLORS.PRIMARY}>
+                            <Text style={styles.buttonText}>Yes</Text>
+                            </Button> 
+                            <Button onPress={this.togglePopup} color={argonTheme.COLORS.PRIMARY}>
+                            <Text style={styles.buttonText}>No</Text>
+                            </Button>
+                            
+                            
+                            
+                        </View>
+                    </View>
+                </Modal>
+                    <Block middle>
+                        <Text h4>{user.heartsGiven}</Text>
+                        <Text>hearts given</Text>
+                    </Block>
+                </Block>
+
+                {/* Divider */}
+                <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
+                    <Block style={styles.divider} />
+                </Block>
+                {/* <Block middle>
+                    <Text
+                        size={16}
+                        color="#525F7F"
+                        style={{ textAlign: "center", fontFamily: "open-sans-regular" }}
+                    >
+                        An artist of considerable range, Jessica name taken by Melbourne …
+                    </Text>
+                    <Button
+                        color="transparent"
+                        textStyle={{
+                            color: "#233DD2",
+                            fontWeight: "500",
+                            fontSize: 16,
+                            fontFamily: "open-sans-regular",
+                        }}
+                    >
+                        Show more
+                    </Button>
+                </Block> */}
+
+                {/* Lower Bottom */}
+                <Block row style={{ paddingVertical: 14 }} space="between">
+                    <Text bold size={16} color="#525F7F" style={{ marginTop: 3 }}>
+                        Community
+                    </Text>
+                    {/* <Button
+                        small
+                        color="transparent"
+                        textStyle={{ color: "#5E72E4", fontSize: 14 }}
+                    >
+                        View all
+                    </Button> */}
+                </Block>
+                <Block style={{ paddingBottom: -HeaderHeight * 2 }}>
+                    {/* <Block row space="between" style={{ flexWrap: "wrap" }}>
+                        {Images.Viewed.map((img, imgIndex) => (
+                            <Image
+                                source={{ uri: img }}
+                                key={`viewed-${img}`}
+                                resizeMode="cover"
+                                style={styles.thumb}
+                            />
+                        ))}
+                    </Block> */}
+                    {/* <Block>
+                        {articles.map((elem, index) => (
+                            // <CommunityPost title={elem.title} content={elem.content} key={index} />
+                            <Card item={elem} key={index} horizontal />
+                        ))}
+                    </Block> */}
+                </Block>
+            </Block>
+        </Block>
+        <Block style={{ marginBottom: 80 }} />
+        </>
+        )
+    }
+
     render() {
-        const { navigation } = this.props;
+
+        // const user = route.param?.user;
+        // user ? (console.log(user)) : (console.log("no user"));
 
         return (
             <Block flex style={styles.profile}>
@@ -43,167 +189,7 @@ class Profile extends React.Component {
                         imageStyle={styles.profileBackground}
                     >
                         <ScrollView showsVerticalScrollIndicator={false} style={{ width, marginTop: "25%" }}>
-                            <Block flex style={styles.profileCard}>
-                                <Block middle style={styles.avatarContainer}>
-                                    <Image source={Images.ProfilePicture2} style={styles.avatar} />
-                                </Block>
-                                {/* <Block style={styles.info}>
-                                    <Block middle row space="evenly" style={{ marginTop: 20, paddingBottom: 24 }}>
-                                        <Button small style={{ backgroundColor: argonTheme.COLORS.INFO }}>
-                                            CONNECT
-                                        </Button>
-                                        <Button small style={{ backgroundColor: argonTheme.COLORS.DEFAULT }}>
-                                            MESSAGE
-                                        </Button>
-                                    </Block>
-                                    <Block row space="between">
-                                        <Block middle>
-                                            <Text
-                                                size={18}
-                                                color="#525F7F"
-                                                style={{ marginBottom: 4, fontFamily: "open-sans-bold" }}
-                                            >
-                                                2K
-                                            </Text>
-                                            <Text
-                                                style={{ fontFamily: "open-sans-regular" }}
-                                                size={12}
-                                                color={argonTheme.COLORS.TEXT}
-                                            >
-                                                Orders
-                                            </Text>
-                                        </Block>
-                                        <Block middle>
-                                            <Text
-                                                color="#525F7F"
-                                                size={18}
-                                                style={{ marginBottom: 4, fontFamily: "open-sans-bold" }}
-                                            >
-                                                10
-                                            </Text>
-                                            <Text
-                                                style={{ fontFamily: "open-sans-regular" }}
-                                                size={12}
-                                                color={argonTheme.COLORS.TEXT}
-                                            >
-                                                Photos
-                                            </Text>
-                                        </Block>
-                                        <Block middle>
-                                            <Text
-                                                color="#525F7F"
-                                                size={18}
-                                                style={{ marginBottom: 4, fontFamily: "open-sans-bold" }}
-                                            >
-                                                89
-                                            </Text>
-                                            <Text
-                                                style={{ fontFamily: "open-sans-regular" }}
-                                                size={12}
-                                                color={argonTheme.COLORS.TEXT}
-                                            >
-                                                Comments
-                                            </Text>
-                                        </Block>
-                                    </Block>
-                                </Block> */}
-                                <Block flex>
-                                    <Block middle style={styles.nameInfo}>
-                                        <Text style={{ fontFamily: "open-sans-regular" }} size={28} color="#32325D">
-                                            Jessica Jones
-                                        </Text>
-                                        <Text
-                                            size={14}
-                                            color="#32325D"
-                                            style={{ marginTop: 10, fontFamily: "open-sans-light" }}
-                                        >
-                                            MeUnity
-                                        </Text>
-                                        <Text
-                                            size={16}
-                                            color="#32325D"
-                                            style={{ marginTop: 10, fontFamily: "open-sans-light" }}
-                                        >
-                                            <Icon name="location-on" family="MaterialIcons" size={14} color={"black"} />
-                                            &nbsp; Woodlands, Woodgrove
-                                        </Text>
-                                    </Block>
-
-                                    <Block flex space="evenly" row style={{ marginTop: 40 }}>
-                                        <Block middle>
-                                            <Text h4>380</Text>
-                                            <Text>hearts received</Text>
-                                        </Block>
-                                        <Block middle>
-                                            <TouchableOpacity onPress={() => navigation.navigate("HomeDrawer")}>
-                                                <Image source={Images.ProfileGiveHand} />
-                                            </TouchableOpacity>
-                                        </Block>
-                                        <Block middle>
-                                            <Text h4>380</Text>
-                                            <Text>hearts given</Text>
-                                        </Block>
-                                    </Block>
-
-                                    {/* Divider */}
-                                    <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
-                                        <Block style={styles.divider} />
-                                    </Block>
-                                    {/* <Block middle>
-                                        <Text
-                                            size={16}
-                                            color="#525F7F"
-                                            style={{ textAlign: "center", fontFamily: "open-sans-regular" }}
-                                        >
-                                            An artist of considerable range, Jessica name taken by Melbourne …
-                                        </Text>
-                                        <Button
-                                            color="transparent"
-                                            textStyle={{
-                                                color: "#233DD2",
-                                                fontWeight: "500",
-                                                fontSize: 16,
-                                                fontFamily: "open-sans-regular",
-                                            }}
-                                        >
-                                            Show more
-                                        </Button>
-                                    </Block> */}
-
-                                    {/* Lower Bottom */}
-                                    <Block row style={{ paddingVertical: 14 }} space="between">
-                                        <Text bold size={16} color="#525F7F" style={{ marginTop: 3 }}>
-                                            Community
-                                        </Text>
-                                        {/* <Button
-                                            small
-                                            color="transparent"
-                                            textStyle={{ color: "#5E72E4", fontSize: 14 }}
-                                        >
-                                            View all
-                                        </Button> */}
-                                    </Block>
-                                    <Block style={{ paddingBottom: -HeaderHeight * 2 }}>
-                                        {/* <Block row space="between" style={{ flexWrap: "wrap" }}>
-                                            {Images.Viewed.map((img, imgIndex) => (
-                                                <Image
-                                                    source={{ uri: img }}
-                                                    key={`viewed-${img}`}
-                                                    resizeMode="cover"
-                                                    style={styles.thumb}
-                                                />
-                                            ))}
-                                        </Block> */}
-                                        <Block>
-                                            {/* {articles.map((elem, index) => (
-                                                // <CommunityPost title={elem.title} content={elem.content} key={index} />
-                                                <Card item={elem} key={index} horizontal />
-                                            ))} */}
-                                        </Block>
-                                    </Block>
-                                </Block>
-                            </Block>
-                            <Block style={{ marginBottom: 80 }} />
+                            {this.renderInformation()}
                         </ScrollView>
                     </ImageBackground>
                 </Block>
@@ -280,6 +266,35 @@ const styles = StyleSheet.create({
         width: thumbMeasure,
         height: thumbMeasure,
     },
-});
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+      },
+      modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+      },
+      centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+      },
+      buttonText: {
+        color: 'black', // Change this color to the desired text color
+        fontSize: 16,   // Adjust the font size as needed
+        fontWeight: 'bold', // You can adjust the font weight (e.g., 'normal', 'bold')
+    },
+    })
 
-export default Profile;
