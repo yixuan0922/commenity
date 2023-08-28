@@ -117,7 +117,7 @@ fetchUsers = () => {
     return (
       <Block style={styles.notfound}>
         <Text style={{ fontFamily: 'open-sans-regular' }} size={18} color={argonTheme.COLORS.TEXT}>
-          We didn’t find "<Text bold>{this.state.search}</Text>" in our store.
+          We didn’t find "<Text bold>{this.state.search}</Text>" in our database.
         </Text>
 
         <Text size={18} style={{ marginTop: theme.SIZES.BASE, fontFamily: 'open-sans-regular' }} color={argonTheme.COLORS.TEXT}>
