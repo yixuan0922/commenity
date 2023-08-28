@@ -53,7 +53,7 @@ class LeaderBoard extends React.Component {
         const districtAggregatedHearts = responseData.reduce((aggHearts, entry) => {
             const { district, heartsReceived } = entry;
             if (!aggHearts[district]) {
-                aggHearts[district] = 0;
+                aggHearts[district] = 0; //im setting it to 0 if I haven't encountered it yet. considering using a hashmap see how
             }
             aggHearts[district] += heartsReceived;
             return aggHearts;
@@ -66,8 +66,17 @@ class LeaderBoard extends React.Component {
 
     render() {
         const { aggregatedData } = this.state;
+        
         const currentDate = new Date().toLocaleString('default', { month: 'long', year: 'numeric' });
-
+        const sortedData = aggregatedData
+        ? Object.keys(aggregatedData)
+        .map(district => ({ district, heartsReceived: aggregatedData[district] })) // if aggregated data is fetched, take the districts and map them
+        .sort((a, b) => b.heartsReceived - a.heartsReceived)
+        : null;
+        const convertedToObject = sortedData? sortedData.reduce((result, item) => {
+            result[item.district] = item.heartsReceived; //would be better with ts but works
+            return result;
+        }, {}):null;
         return (
             <Block flex style={styles.profile}>
                 <Block flex>
@@ -90,7 +99,7 @@ class LeaderBoard extends React.Component {
                         <Block flex style={[styles.profileCard]}>
                             <Block style={{ width: width * 0.85, height: 150 }} row>
                                 {aggregatedData &&
-                                    Object.keys(aggregatedData).map((district, index) => (
+                                    Object.keys(convertedToObject).slice(0,3).map((district, index) => (
                                         <Block flex key={index}>
                                             <Block middle style={styles.avatarContainer}>
                                                 <Image source={Images.redhill} style={styles.avatarSecond} />
@@ -111,7 +120,7 @@ class LeaderBoard extends React.Component {
                                                     color="#32325D"
                                                     style={{ marginTop: 5, fontFamily: "open-sans-light" }}
                                                 >
-                                                    Hearts Received: {aggregatedData[district]}
+                                                    Hearts: {aggregatedData[district]}
                                                 </Text>
                                             </Block>
                                         </Block>
@@ -131,7 +140,7 @@ class LeaderBoard extends React.Component {
                                         <ScrollView showsVerticalScrollIndicator={false}>
                                             <Block flex>
                                                 {aggregatedData &&
-                                                    Object.keys(aggregatedData)
+                                                    Object.keys(convertedToObject)
                                                         .slice(3)
                                                         .map((district, index) => (
                                                             <Board

@@ -51,21 +51,19 @@ class UserCard extends React.Component {
                                 // style={styles.cardTitle}
                                 color={argonTheme.COLORS.TEXT}
                             >
-                                {item.lastName} {item.firstName}
+                                {item.lastName} {item.firstName} 
                             </Text>
-                            {item.username ? (
+                            {item.id && (
                                 <Block flex left>
                                     <Text
                                         style={{ fontFamily: "open-sans-regular" }}
                                         size={12}
                                         color={argonTheme.COLORS.TEXT}
                                     >
-                                        @{item.username}
+                                        @{item.id}
                                     </Text>
                                 </Block>
-                            ) : (
-                                <Block />
-                            )}
+                            ) }
                             <Text
                                 style={[styles.cardTitle, { fontFamily: "open-sans-regular" }]}
                                 size={12}

@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 import { Block, Text, Input, theme } from "galio-framework";
-import users from "../constants/users";
+
 import UserCard from "../components/UserCard";
 
 const { width } = Dimensions.get("screen");
@@ -26,7 +26,9 @@ export default class SearchUser extends React.Component {
   state = {
     results: [],
     search: "",
-    active: false
+    active: false,
+    users: null,
+    foundUsers: []
   };
 
   animatedValue = new Animated.Value(0);
@@ -41,10 +43,34 @@ export default class SearchUser extends React.Component {
     }).start();
   }
 
+fetchUsers = () => {
+    const url = "https://us-central1-commenity-edc7c.cloudfunctions.net/app/user";
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+              this.setState({
+                users:data
+              })
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+}
+
+  componentDidMount() {
+    this.fetchUsers();
+  }
+
   handleSearchChange = search => {
-    const results = users.filter(
-      item => search && item.username.toLowerCase().includes(search)
+    const results = this.state.users.filter(
+      user => search && (user.id.toLowerCase().includes(search.toLowerCase()) || 
+      user.firstName.toLowerCase().includes(search.toLowerCase()) ||
+      user.lastName.toLowerCase().includes(search.toLowerCase()) )
     );
+    this.setState({
+      foundUsers: results
+    })
     this.setState({ results, search });
     this.animate();
   };
@@ -134,20 +160,22 @@ export default class SearchUser extends React.Component {
         contentContainerStyle={styles.dealsContainer}
       >
         <Block flex>
-          <Block flex row>
+          {/* <Block flex row>
             <UserCard
               item={users[1]}
               style={{ marginRight: theme.SIZES.BASE }}
             />
             <UserCard item={users[2]} />
-          </Block>
-          <Block flex row>
-            <UserCard
-              item={users[3]}
-              style={{ marginRight: theme.SIZES.BASE }}
-            />
-            <UserCard item={users[4]} />
-          </Block>
+          </Block> */}
+         {this.state.foundUsers && this.state.foundUsers.map(user=>(
+                    <Block flex row>
+                    <UserCard
+                      item={user}
+                      style={{ marginRight: theme.SIZES.BASE }}
+                    />
+                    <UserCard item={user} />
+                  </Block>
+         ))}
         </Block>
       </ScrollView>
     );
@@ -204,6 +232,7 @@ export default class SearchUser extends React.Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   searchContainer: {
