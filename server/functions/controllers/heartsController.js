@@ -108,6 +108,23 @@ const patchHeartsTransaction = async (req, res) => {
   }
 };
 
+const getHeartsInfo = async (req, res) => {
+  const {targetUserId} = req.params;
+
+  try {
+    const user = await db.collection("users")
+        .doc(targetUserId)
+        .get();
+
+    return res.status(200)
+        .json({data: user.data(),
+          message: `successfully got ${targetUserId}'s info!`});
+  } catch (error) {
+    return res.status(500)
+        .json({error: error.message});
+  }
+};
+
 const getDembouz = async (req, res) => {
   const docu = await db.collection("users").doc("dembouz").get();
   return res.status(200).json(docu.data());
@@ -117,4 +134,5 @@ module.exports = {
   updateHearts,
   getDembouz,
   patchHeartsTransaction,
+  getHeartsInfo,
 };

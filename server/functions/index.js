@@ -16,6 +16,7 @@ const {
   updateHearts,
   getDembouz,
   patchHeartsTransaction,
+  getHeartsInfo,
 } = require("./controllers/heartsController.js");
 
 const app = express();
@@ -23,7 +24,7 @@ app.use(express.json());
 
 // app.get("/", (req, res) => res.status(200).json("Hey there Fadhel again!"));
 app.get("/user", getAllUsers);
-app.post("/ ", addUser);
+// app.post("/ ", addUser);
 app.patch("/user/:userId", updateUser);
 app.delete("/user/:userId", deleteUser);
 app.post("/create", addPost);
@@ -32,6 +33,7 @@ app.get("/", getPosts);
 app.patch("/post", updateHearts);
 app.get("/post", getDembouz);
 
+app.get("/giveHearts/:targetUserId", getHeartsInfo);
 app.patch("/giveHearts:userId?", patchHeartsTransaction);
 
 
