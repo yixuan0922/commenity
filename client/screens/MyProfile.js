@@ -133,7 +133,7 @@ class MyProfile extends React.Component {
 
                                     <Block flex space="evenly" row style={{ marginTop: 40 }}>
                                         <Block middle>
-                                            <Text h4>{user[0].heartsReceived}</Text>
+                                            <Text h4>23</Text>
                                             <Text>hearts received</Text>
                                         </Block>
                                         {/* <Block middle>
@@ -142,7 +142,8 @@ class MyProfile extends React.Component {
                                             </TouchableOpacity>
                                         </Block> */}
                                         <Block middle>
-                                            <Text h4>{user[0].heartsGiven}</Text>
+                                            {/* <Text h4>{user[0].heartsGiven}</Text> */}
+                                            <Text h4>5</Text>
                                             <Text>hearts given</Text>
                                         </Block>
                                     </Block>
