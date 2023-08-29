@@ -91,6 +91,7 @@ export default class CommunityPost extends React.Component {
         // const { params } = navigation && navigation.state;
         // const product = params.product;
         const product = route.params?.post;
+        const userid = product.user.id;
 
         return (
             <Block flex style={styles.communitypost}>
@@ -124,7 +125,7 @@ export default class CommunityPost extends React.Component {
                                         size={14}
                                         color={argonTheme.COLORS.TEXT}
                                     >
-                                        Jessica Jones
+                                       {userid}
                                     </Text>
                                 </Block>
                             </Block>
