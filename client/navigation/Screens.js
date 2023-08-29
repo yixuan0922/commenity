@@ -435,7 +435,7 @@ function HomeStack(props) {
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="Search"
                 component={Search}
                 options={{
@@ -444,7 +444,7 @@ function HomeStack(props) {
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
-            />
+            /> */}
             {/* <Stack.Screen
                 name="Cart"
                 component={Cart}
