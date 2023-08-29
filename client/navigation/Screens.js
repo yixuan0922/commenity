@@ -61,14 +61,19 @@ function NotificationsStack(props) {
                     // You can return any component that you like here!
                     return <Icon name={iconName} family="entypo" size={22} color={color} style={{ marginTop: 10 }} />;
                 },
-            })}
-            tabBarOptions={{
+                headerShown: false,
                 activeTintColor: argonTheme.COLORS.PRIMARY,
                 inactiveTintColor: "gray",
                 labelStyle: {
                     fontFamily: "open-sans-regular",
                 },
-            }}
+                tabBarStyle: {
+                    display: "none",
+                },
+                tabBarItemStyle: {
+                    display: "none",
+                },
+            })}
         >
             <Tab.Screen name="Requests" component={PersonalNotifications} />
             {/* <Tab.Screen name="System" component={SystemNotifications} /> */}
@@ -316,7 +321,6 @@ function ProfileStack(props) {
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
             />
-            
         </Stack.Navigator>
     );
 }
@@ -441,7 +445,7 @@ function HomeStack(props) {
                     cardStyle: { backgroundColor: "#F8F9FE" },
                 }}
             />
-    {/* <Stack.Screen
+            {/* <Stack.Screen
                 name="Cart"
                 component={Cart}
                 options={{
@@ -466,9 +470,10 @@ function HomeStack(props) {
                 component={NotificationsStack}
                 options={{
                     header: ({ navigation, scene }) => (
-                        <Header title="Notifications" back navigation={navigation} scene={scene} />
+                        <Header title="Create Post" back navigation={navigation} scene={scene} />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" },
+                    // headerShown: false,
                 }}
             />
         </Stack.Navigator>

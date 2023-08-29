@@ -6,6 +6,10 @@ import { Block, GalioProvider } from "galio-framework";
 import { NavigationContainer } from "@react-navigation/native";
 import { Image } from "react-native";
 
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
+
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
@@ -18,73 +22,73 @@ import { Images, articles, argonTheme } from "./constants";
 
 // cache app images
 const assetImages = [
-  Images.Onboarding,
-  Images.LogoOnboarding,
-  Images.Logo,
-  Images.Pro,
-  Images.ArgonLogo,
-  Images.iOSLogo,
-  Images.androidLogo,
+    Images.Onboarding,
+    Images.LogoOnboarding,
+    Images.Logo,
+    Images.Pro,
+    Images.ArgonLogo,
+    Images.iOSLogo,
+    Images.androidLogo,
 ];
 
 // cache product images
 articles.map((article) => assetImages.push(article.image));
 
 function cacheImages(images) {
-  return images.map((image) => {
-    if (typeof image === "string") {
-      return Image.prefetch(image);
-    } else {
-      return Asset.fromModule(image).downloadAsync();
-    }
-  });
+    return images.map((image) => {
+        if (typeof image === "string") {
+            return Image.prefetch(image);
+        } else {
+            return Asset.fromModule(image).downloadAsync();
+        }
+    });
 }
 
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
+    const [appIsReady, setAppIsReady] = useState(false);
 
-  useEffect(() => {
-    async function prepare() {
-      try {
-        //Load Resources
-        await _loadResourcesAsync();
-        // Pre-load fonts, make any API calls you need to do here
-        await Font.loadAsync({
-          "open-sans-regular": require("./assets/font/OpenSans-Regular.ttf"),
-          "open-sans-light": require("./assets/font/OpenSans-Light.ttf"),
-          "open-sans-bold": require("./assets/font/OpenSans-Bold.ttf"),
-        });
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        // Tell the application to render
-        setAppIsReady(true);
-      }
+    useEffect(() => {
+        async function prepare() {
+            try {
+                //Load Resources
+                await _loadResourcesAsync();
+                // Pre-load fonts, make any API calls you need to do here
+                await Font.loadAsync({
+                    "open-sans-regular": require("./assets/font/OpenSans-Regular.ttf"),
+                    "open-sans-light": require("./assets/font/OpenSans-Light.ttf"),
+                    "open-sans-bold": require("./assets/font/OpenSans-Bold.ttf"),
+                });
+            } catch (e) {
+                console.warn(e);
+            } finally {
+                // Tell the application to render
+                setAppIsReady(true);
+            }
+        }
+        prepare();
+    }, []);
+
+    const _loadResourcesAsync = async () => {
+        return Promise.all([...cacheImages(assetImages)]);
+    };
+
+    const onLayoutRootView = useCallback(async () => {
+        if (appIsReady) {
+            await SplashScreen.hideAsync();
+        }
+    }, [appIsReady]);
+
+    if (!appIsReady) {
+        return null;
     }
-    prepare();
-  }, []);
 
-  const _loadResourcesAsync = async () => {
-    return Promise.all([...cacheImages(assetImages)]);
-  };
-
-  const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      await SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
-
-  if (!appIsReady) {
-    return null;
-  }
-
-  return (
-    <NavigationContainer onReady={onLayoutRootView}>
-      <GalioProvider theme={argonTheme}>
-        <Block flex>
-          <Screens />
-        </Block>
-      </GalioProvider>
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer onReady={onLayoutRootView}>
+            <GalioProvider theme={argonTheme}>
+                <Block flex>
+                    <Screens />
+                </Block>
+            </GalioProvider>
+        </NavigationContainer>
+    );
 }
