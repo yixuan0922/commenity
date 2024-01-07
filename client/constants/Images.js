@@ -11,6 +11,7 @@ const androidLogo = require("../assets/imgs/android.png");
 const ProfilePicture = require("../assets/imgs/profile-img.jpg");
 const ProfilePicture2 = require("../assets/imgs/profile-img2.jpg");
 const ProfileGiveHand = require("../assets/imgs/profile-give-hand.png");
+const yxProfile = require("../assets/imgs/yx_profile.jpg")
 
 // local district images
 const redhill = require("../assets/imgs/redhill.jpg");
@@ -70,4 +71,5 @@ export default {
     ProfileChat,
     redhill,
     bukitPanjang,
+    yxProfile,
 };

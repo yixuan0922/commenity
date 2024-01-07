@@ -47,7 +47,7 @@ class MyProfile extends React.Component {
                         <ScrollView showsVerticalScrollIndicator={false} style={{ width, marginTop: "25%" }}>
                             <Block flex style={styles.profileCard}>
                                 <Block middle style={styles.avatarContainer}>
-                                    <Image source={Images.ProfilePicture2} style={styles.avatar} />
+                                    <Image source={Images.yxProfile} style={styles.avatar} />
                                 </Block>
                                 {/* <Block style={styles.info}>
                                     <Block middle row space="evenly" style={{ marginTop: 20, paddingBottom: 24 }}>
